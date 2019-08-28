@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        /* 动态创建script标签发出去的请求是异步请求 
+           服务器响应的内容是 【函数调用】 foo(实参)
+        */
+        var flag = 1;
+        var head = document.getElementsByTagName('head')[0];
+        var script = document.createElement('script');
+        script.src = 'http://tom.com/data.php?callback=abc';
+        head.appendChild(script);
+        // 下面一部分的位置不受约束，可以放在上边
+        //是谁调用了下面的函数？实际上是由服务器响应的内容来调用的，响应的内容是一个函数的调用【foo(实参)】
+        //这是从服务器端返回来的数据（js代码）：foo({"username":"zhangsan","password":"123"})
+        function abc(data){//这里的abc，要与src中的callback=后面的内容对应
+            console.log(data.username,data.password);
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

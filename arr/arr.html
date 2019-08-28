@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        var arr = [3, 0, 4, 5, 11, 0, 22, 44, 33, 66, 55, 5];
+        var sum = 0;
+        var min = arr[0];
+        var minIndex = 0;
+        var maxIndex = 0;
+        var max = arr[0];
+        for (var i = 0; i < arr.length; i++) {
+            sum += arr[i];
+            if (min > arr[i + 1]) {
+                min = arr[i + 1];
+                minIndex = i + 1;
+            }
+            if (max < arr[i + 1]) {
+                max = arr[i + 1];
+                maxIndex = i + 1;
+            }
+        }
+        // var str = arr.join('|');
+        var str = arr[0];
+        var seperator = '|';
+        for (var i = 1; i < arr.length; i++) {
+            str += seperator + arr[i];
+        }
+        console.log(str);
+        console.log('和为：' + sum);
+        console.log('平均数为' + sum / arr.length);
+        console.log('最小值为：' + min + '---最大值为：' + max);
+        console.log('最小值索引为：' + minIndex + '---最大值索引为：' + maxIndex);
+        // 筛选数组，将0响去掉，其他元素组成新数组
+        var newArr = [];
+        for (var i = 0; i < arr.length; i++) {
+            if (arr[i] !== 0) {
+                newArr[newArr.length] = arr[i];
+            }
+        }
+        console.log(arr);
+        console.log(newArr);
+        // 翻转数组
+        var revArr = [];
+        for (var j = arr.length - 1; j >= 0; j--) {
+            revArr[revArr.length] = arr[j];
+        }
+        console.log(revArr);
+        console.log(newArr.reverse());
+        //冒泡排序   从小到大  --- 优化
+        var arr1 = [87, 23, 43, 12, 56, 24];
+        /* 6个数，需要循环5遍，每次找到最大值放在最后
+        第1遍，需要两两比较5次
+        第2遍，需要两两比较4次 …… */
+        //外层循环，控制趟数
+        for (var i = 0; i < arr1.length - 1; i++) {
+            //假设排好序了
+            var isSort = true;
+            //内层循环，控制比较的次数
+            for (var j = 0; j < arr1.length - 1 - i; j++) {
+                if (arr1[j] > arr1[j + 1]) {
+                    isSort = false;
+                    var temp = arr1[j];
+                    arr1[j] = arr1[j + 1];
+                    arr1[j + 1] = temp;
+                }
+            }
+            //判断是否排好了
+            if (isSort) {
+                break;
+            }
+        }
+        console.log(arr1);
+        arr1.unshift(4, 5, 6, 7);
+        console.log(arr1);
+        arr1.reverse();
+        console.log(arr1);
+        arr1.sort();
+        console.log(arr1);
+        // indexOf方法
+        var str = "Hello  world!"
+        document.write(str.indexOf("Hello") + "<br />");
+        document.write(str.indexOf("World") + "<br />");
+        document.write(str.indexOf("world"));
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

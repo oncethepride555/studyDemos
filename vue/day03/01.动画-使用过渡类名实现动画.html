@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+    <style>
+        .v-enter,
+        .v-leave-to {
+            opacity: 0;
+            /* 透明度 */
+            transform: translateX(160px);
+            /* 水平位移 */
+        }
+
+        .v-enter-active,
+        .v-leave-active {
+            transition: all 0.8s ease;
+            /* 针对哪些属性设置动画、动画持续时间、转速曲线 */
+        }
+
+        /* 修改v-前缀 */
+        .my-enter,
+        .my-leave-to {
+            opacity: 0;
+            /* 透明度 */
+            transform: translateY(160px);
+            /* 水平位移 */
+        }
+
+        .my-enter-active,
+        .my-leave-active {
+            transition: all 0.8s ease;
+            /* 针对哪些属性设置动画、动画持续时间、转速曲线 */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 需求：点击按钮，让 h3 显示，再点击，让其隐藏，如此反复 -->
+        <input type="button" value="toggle" @click="flag = !flag">
+        <!-- 方法1：使用 transition 元素，把需要被动画控制的元素包裹起来 -->
+        <!-- transition 元素是 Vue 官方提供的 -->
+        <transition>
+            <h3 v-if="flag">这是一个H3</h3>
+        </transition>
+
+        <hr>
+        <input type="button" value="toggle2" @click="flag2 = !flag2">
+        <transition name="my">
+            <h4 v-if="flag2">这是一个H4</h4>
+        </transition>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                flag: false,
+                flag2: false
+            },
+            methods: {}
+        })
+    </script>
+</body>
+
+</html>

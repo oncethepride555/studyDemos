@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        window.onload = function () {
+            var dv = document.getElementById('dv');
+            var btn = document.getElementById('btn');
+            btn.onclick = function () {
+                var xhr = null;
+                if (window.XMLHttpRequest) {
+                    xhr = new XMLHttpRequest();
+                } else {
+                    xhr = new ActiveXObject('Microsoft.XMLHTTP');
+                }
+                xhr.open('get', '08.php', true);
+                xhr.send(null);
+                console.log(1);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4) {
+                        if (xhr.status == 200) {
+                            var data = xhr.responseText;
+                            var d = JSON.parse(data);
+                            var s = '<ul><li>name:' + d.name + '</li><li>age:' + d.age + '</li><li>sex:' + d.sex + '</li></ul>';
+                            dv.innerHTML = s;
+                            console.log(2);
+                        }
+                    }
+                }
+                console.log(3);
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="dv"></div>
+    <input type="button" value="显示" id="btn">
+</body>
+
+</html>

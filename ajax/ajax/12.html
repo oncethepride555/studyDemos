@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        #container {
+            width: 360px;
+            min-height: 200px;
+            background-color: #f6e7a8;
+            position: absolute;
+            left: 50%;
+            top: 10px;
+            margin-left: -180px;
+            padding: 10px 0 0 10px;
+        }
+
+        table {
+            width: 300px;
+            margin-top: 10px;
+            margin-left: 10px;
+            border-right: 1px solid #000000;
+            border-bottom: 1px solid #000000;
+            text-align: center;
+            border-collapse: collapse;
+        }
+
+        td {
+            border-left: 1px solid #000000;
+            border-top: 1px solid #000000;
+        }
+    </style>
+    <script src="jquery.js"></script>
+    <script>
+        $(function () {
+            $("#query").click(function () {
+                var code = $("#code").val();
+                // $.ajax({//type不写的话，默认为get
+                //     type: 'get',
+                //     url: './11.php',
+                //     data: { code: code },//变量可以以对象的方式传递
+                //     dataType: 'json',//不指定的话，默认为text
+                //     success: function (data) {//回调函数
+                //         //解析数据并渲染页面
+                //         if (data.flag == 0) {
+                //             $("#info").html("没有这本书");
+                //         } else {
+                //             var s = '<table><tr><td>编号</td><td>书名</td><td>作者</td></tr><tr><td>' + code + '</td><td>' + data.name + '</td><td>' + data.author + '</td></tr></table>';
+                //             $("#info").html(s);
+                //         }
+                //     },
+                //     error:function(){//服务端发生错误时调用
+                //         $("#info").html("服务器端发生错误，请与管理员联系。");
+                //     }
+                // });
+                var data = $.ajax({//type不写的话，默认为get
+                    type: 'get',
+                    url: './11.php',
+                    async: false,//同步
+                    data: { code: code },//变量可以以对象的方式传递
+                    dataType: 'json',//不指定的话，默认为text
+                });
+                //同步时，多了一个responseJSON
+                data = data.responseJSON;
+                if (data.flag == 0) {
+                    $("#info").html("没有这本书");
+                } else {
+                    var s = '<table><tr><td>编号</td><td>书名</td><td>作者</td></tr><tr><td>' + code + '</td><td>' + data.name + '</td><td>' + data.author + '</td></tr></table>';
+                    $("#info").html(s);
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div id="container">
+        图书编码：<input type="text" id="code">
+        <input type="button" value="查询" id="query">
+        <div id="info">
+
+        </div>
+    </div>
+</body>
+
+</html>
