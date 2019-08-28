@@ -37,6 +37,7 @@
             },
             methods: {
                 click() {
+                    // 通过$emit()方法来拿到从父组件传递过来的 func 
                     this.$emit('func', this.msgson)
                 }
             }
