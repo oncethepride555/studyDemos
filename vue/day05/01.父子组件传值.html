@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,12 +8,56 @@
     <title>Document</title>
     <script src="./lib/vue-2.4.0.js"></script>
 </head>
+
 <body>
-    
+    <div id="app">
+        <!-- 父组件向子组件传值 v-bind:parentmsg="msg" -->
+        <!-- 子组件向父组件传值  @func="sendMsg"-->
+        <com1 v-bind:parentmsg="msg" @func="sendMsg"></com1>
+    </div>
+
+    <template id="tmp">
+        <div>
+            <!-- 父组件向子组件传值 -->
+            <h2>给你一百块钱吧儿子 {{ parentmsg }}</h2>
+            <!-- 子组件向父组件传值 -->
+            <input type="button" value="子组件向父组件传值" @click="click">
+        </div>
+    </template>
+
+    <script>
+        var com1 = {
+            template: '#tmp',
+            // 父组件向子组件传值
+            props: ['parentmsg'],
+            data() {
+                return {
+                    msgson: '爸，给你钱'
+                }
+            },
+            methods: {
+                click() {
+                    this.$emit('func', this.msgson)
+                }
+            }
+        }
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 'myson',
+                dataFromSon: ''
+            },
+            methods: {
+                sendMsg(data) {
+                    this.dataFromSon = data
+                    console.log(this.dataFromSon)
+                }
+            },
+            components: {
+                com1
+            }
+        })
+    </script>
 </body>
+
 </html>
-<!-- 测试同步 -->
-<!-- 从远程库到本地库 -->
-<!-- 从远程库到本地库-使用命令行 -->
-<!-- 从远程库到本地库-使用vs code中的终端 -->
-<!-- 从 wss pc 到 GitHub -->
