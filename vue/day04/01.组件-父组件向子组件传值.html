@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 以属性绑定的形式，把子组件需要的数据从父组件传递过去 -->
+        <com1 v-bind:parentmsg="msg"></com1>
+    </div>
+
+    <script>
+        var vm = new Vue({ // vm实例可以看作是一个大的组件（父组件）
+            el:'#app',
+            data:{
+                msg:'哈哈哈，我就是'
+            },
+            methods:{},
+            components:{ // 子组件
+                com1:{
+                    template:'<h3>我想引用父组件中的数据---{{parentmsg}}</h3>',
+                    // 把父组件传递过来的 parentmsg 属性，先在 props 数组中定义一下，才能使用
+                    props:['parentmsg']
+                }
+                
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+</head>
+<body>
+    <div id="app">
+        <com2 v-on:func="show"></com2>
+        子组件向父组件传过来的值：{{ datafromson }}
+    </div>
+
+    <template id="tmp">
+        <div>
+            <h1>这是子组件</h1>
+            <input type="button" value="这是子组件中的按钮，点击它，触发父组件传递过来的方法" @click="myclick">
+        </div>
+    </template>
+
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                datafromson:''
+            },
+            methods:{
+                show(data){
+                    console.log('触发了父组件中的方法----' + data)
+                    this.datafromson = data // 把从子组件传递过来的值赋给datafromson
+                }
+            },
+            components:{
+                com2:{ // com2 组件
+                    template:'#tmp',
+                    data(){
+                        return {
+                            sonmsg:'我来自子组件'
+                        }
+                    },
+                    methods:{
+                        myclick(){
+                            // this 指的是 com2，通过$emit()方法来拿到从父组件传递过来的 func 方法，并调用它
+                            // 123 是给 show 方法传递的参数
+                            // this.$emit('func',123)
+                            this.$emit('func',this.sonmsg) // 通过这种方式相当于向父组件传值
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

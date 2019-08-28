@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+</head>
+
+<body>
+    <!-- 引用全局组件 -->
+    <div id="app">
+        <my-com1></my-com1>
+        <mycom2></mycom2>
+        <mycom3></mycom3>
+    </div>
+
+    <!-- 引用私有组件 -->
+    <div id="app2">
+        <login></login>
+    </div>
+
+    <!-- 全局组件 -->
+    <!-- 在被控制的 #app 外面，使用 template 元素，定义组件的HTML模板结构 -->
+    <template id="tmp">
+        <div>
+            <h3>这是通过 template 元素在外部定义的组件结构，这个方式有代码智能提示和高亮</h3>
+            <span>好用</span>
+        </div>
+    </template>
+
+    <!-- 私有组件 -->
+    <template id="tmp2">
+        <h4>私有组件私有组件</h4>
+    </template>
+
+    <script>
+        var mycom1 = Vue.extend({
+            template: '<h3>加油，你是最棒的！</h3>'
+        })
+
+        // 全局组件-方式一
+        Vue.component('myCom1', mycom1)
+
+        // 全局组件-方式二
+        Vue.component('mycom2', {
+            template: '<div><h3>加油，你是最棒的！</h3><span>栗子</span></div>'
+        })
+
+        // 全局组件-方式三
+        Vue.component('mycom3', {
+            template: '#tmp'
+        })
+
+        var vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {}
+        })
+
+        var login = {
+            template: '<h4>私有组件</h4>'
+        }
+
+        var vm2 = new Vue({
+            el: '#app2',
+            data: {},
+            methods: {},
+            filters: {},
+            directives: {},
+            components: { // 私有组件
+                // 'login': { // login 是组件的名称
+                //     template: '#tmp2'
+                // }
+                login
+            },
+
+            beforeCreate() { },
+            created() { },
+            beforeMount() { },
+            mounted() { },
+            beforeUpdate() { },
+            updated() { },
+            beforeDestroy() { },
+            destroyed() { }
+        })
+    </script>
+</body>
+
+</html>

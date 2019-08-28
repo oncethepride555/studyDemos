@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .red {
+            color: red;
+        }
+
+        .thin {
+            font-weight: 200;
+        }
+
+        .italic {
+            font-style: italic;
+        }
+
+        .active {
+            letter-spacing: 2em;
+        }
+    </style>
+    <script src="./lib/vue-2.4.0.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 第一种：直接传递一个数组，注意：这里的 class 需要使用 v-bind 做数据绑定 -->
+        <h1 :class="['red', 'thin', 'italic']">一个人想着一个人_曾沛慈</h1>
+
+        <!-- 第二种：数组中可以设置三元表达式 -->
+        <h1 :class="['red', 'thin', 'italic', flag ? 'active' : '']">一个人想着一个人_曾沛慈</h1>
+
+        <!-- 第三种：对象代替三元表达式，提高代码可读性 -->
+        <h1 :class="['red', 'thin', 'italic', {'active' : flag}]">一个人想着一个人_曾沛慈</h1>
+
+        <!-- 第四种：为class使用v-bind绑定对象，对象的属性是类名，属性值是一个标识符，属性名可以加引号，也可以不加-->
+        <h1 :class="{red:true, thin:false, italic:true, active:true}">一个人想着一个人_曾沛慈</h1>
+
+        <!-- 整个对象可以放到data中 然后在这里做属性的引用-->
+        <h1 :class="classObj">一个人想着一个人_曾沛慈</h1>
+    </div>
+    
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                flag: false,
+                classObj: {red:true, thin:true, italic:true, active:true}
+            },
+            methods: {}
+        })
+    </script>
+</body>
+
+</html>

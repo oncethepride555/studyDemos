@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 使用v-cloak 能够解决插值表达式闪烁的问题 -->
+        <p v-cloak>++++++{{msg}}----------</p>
+        <!-- v-text 和 插值表达式 实现的效果相同，但是有以下差异：
+            1.默认 v-text 是没有闪烁问题的
+            2.v-text 会覆盖元素中原本的内容，但是 插值表达式 只会替换自己的这个占位符，不会把整个元素的内容清空
+        -->
+        <h4 v-text="msg">===========</h4><!-- 这里的===========被覆盖了，不会显示 -->
+        <!-- v-html 把数据解析成html格式 -->
+        <div v-html="msg2"></div>
+        <!-- v-bind: 用于给属性（例如title）绑定值，这里的 mytitle 是一个变量 -->
+        <!-- v-bind: 绑定的值里可以写合法的js表达式 -->
+        <!-- v-bind:属性名 可以简写为 :属性名 -->
+        <button v-bind:title="mytitle + '123'">按钮</button>
+        <!-- v-on: 事件绑定机制 -->
+        <button v-on:click="show">点击我</button>
+        <!-- v-on: 可以简写 @ -->
+        <button @click="show">点击我</button>
+    </div>
+
+    <script src="./lib/vue-2.4.0.js"></script>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: '123',
+                msg2: '<h1>我是一个大大的h1</h1>',
+                mytitle:'这是一个自定义的标题'
+            },
+            methods:{
+                show:function(){
+                    alert('hahaha');
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

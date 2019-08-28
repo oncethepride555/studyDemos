@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        #container {
+            width: 500px;
+            min-height: 300px;
+            background-color: lightgreen;
+            margin: auto;
+            padding-top: 20px;
+            text-align: center;
+        }
+        li{
+            list-style: none;
+        }
+        #info{
+            text-align: left;
+            padding-left: 80px;
+        }
+    </style>
+    <script src="./jquery.js"></script>
+    <script>
+        $(function () {
+            $('#query').click(function () {
+                var city = $('#city').val();
+                $.ajax({
+                    type: 'get',
+                    url: 'http://localhost/summary/citycode.php',
+                    data: { cityName: city },
+                    dataType: 'json',
+                    success: function (data) {
+                        //再发一次请求
+                        $.ajax({
+                            type: 'get',
+                            url: 'http://localhost/summary/cityweather.php',
+                            data: { cityCode: data.cityCode },
+                            dataType: 'json',
+                            success: function (data) {
+                                var tag = '<ul><li>日期：' + data.retData.date + '</li><li>天气：' + data.retData.weather + '</li><li>温度：' + data.retData.temp + '</li></ul>'
+                                $('#info').html(tag);
+                            }
+                        })
+                    }
+                })
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div id="container">
+        城市名称：<input type="text" id="city">
+        <input type="button" value="查询" id="query">
+        <div id="info"></div>
+    </div>
+</body>
+
+</html>

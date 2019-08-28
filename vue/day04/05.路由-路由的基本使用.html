@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+    <!-- 1.安装 vue-router 路由模块 -->
+    <script src="./lib/vue-router-3.0.1.js"></script>
+    <style>
+        .myactive {
+            font-weight: 800;
+            color: #ff0000;
+            font-size: 60;
+            font-style: italic;
+            text-decoration: underline;
+            background-color: #ffff00;
+        }
+
+        .v-enter,
+        .v-leave-to {
+            opacity: 0;
+            transform: translateX(80px);
+        }
+
+        .v-enter-active,
+        .v-leave-active {
+            transition: all 0.5s ease;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 因为每次都需要加#，不推荐使用 -->
+        <!-- <a href="#/login">登录</a>
+        <a href="#/register">注册</a> -->
+
+        <!-- router-link 默认渲染为一个a标签 通过tag属性改变标签-->
+        <router-link to="/login" tag="span">登录</router-link>
+        <router-link to="/register">注册</router-link>
+
+        <!-- 5.这是 vue-router 提供的元素，专门用来当作 占位符 的，将来 路由规则 匹配到的组件，就会展示到这个 router-view 中去 -->
+        <transition mode="out-in">
+            <router-view></router-view>
+        </transition>
+    </div>
+
+    <script>
+        // 2.组件的模板对象
+        var login = {
+            template: '<h3>登录模块</h3>'
+        }
+        var register = {
+            template: '<h3>注册模块</h3>'
+        }
+
+        // 3.创建一个路由对象，当导入vue-router包之后，在window全局对象中，就有了一个路由的构造函数，叫做VueRouter
+        // 在new 路由对象的时候，可以为构造函数传递一个配置对象{}
+        var routeObj = new VueRouter({
+            routes: [ // 配置对象中的 routes 表示 【路由匹配规则】的意思
+                // 每个路由规则，都是一个对象，在这个规则对象上，有两个必要的属性：
+                // 属性1：path，表示监听哪个路由链接地址
+                // 属性2：component，表示展示哪一个组件
+                // 注意：component 的属性值，必须是一个 组件的模板对象，不能是 组件的引用名称，不带引号
+                // redirect 重定向 可以实现默认展示某个页面
+                { path: '/', redirect: '/login' },
+                { path: '/login', component: login },
+                { path: '/register', component: register }
+            ],
+            linkActiveClass: 'myactive'
+        })
+        var vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+            router: routeObj // 4.将路由规则对象，注册到 vm 实例上，用来监听 URL 地址的变化，然后展示对应的组件
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+</head>
+
+<body>
+    <!-- 这个 key 相当于把 每一行字和它前面的复选框关联了起来，即使当在前头插入了一行新的数据，该哪个选中还是哪个选中，不会发生错位 -->
+    <div id="app">
+        <label>ID：
+            <input type="text" v-model="n1">
+        </label>
+
+        <label>name：
+            <input type="text" v-model="n2">
+        </label>
+
+        <input type="button" value="添加" @click="add">
+
+        <!-- 为了给vue一个提示，以便它能跟踪每个节点的身份，从而重用和重新排序现有元素，需要为每项提供一个唯一 key 属性 -->
+        <div v-for="item in aaObj" v-bind:key="item.id">
+            <label>
+                <input type="checkbox">
+                <span>id：{{item.id}}-----name：{{item.name}}</span>
+            </label>
+        </div>
+
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                n1: '',
+                n2: '',
+                aaObj: [
+                    { id: 1, name: '吴浩宇' },
+                    { id: 2, name: '吴烁烁' },
+                    { id: 3, name: '王修立' }
+                ]
+
+
+            },
+            methods: {
+                add() {
+                    this.aaObj.unshift({ id: this.n1, name: this.n2 })
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

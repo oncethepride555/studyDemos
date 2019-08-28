@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+    <style>
+        .ball {
+            width: 20px;
+            height: 20px;
+            background-color: #ff0000;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <input type="button" value="加入购物车" @click="flag = !flag">
+        <transition @before-Enter="beforeEnter" @enter="enter" @after-Enter="afterEnter" @before-leave="beforeLeave"
+            @leave="leave" @after-leave="afterLeave">
+            <div class="ball" v-if="flag"></div>
+            <!-- flag = false 就代表了小球离开消失，所以当 flag = false 的瞬间就会自动触发离场的三个函数 -->
+            <!-- 入场函数的触发时间：flag 从 false 变为 true 的时候 -->
+        </transition>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                flag: false
+            },
+            methods: {
+                beforeEnter(el) {
+                    console.log('1' + this.flag)
+                    el.style.transform = "translate(0,0)"
+                },
+                enter(el, done) {
+                    console.log('2' + this.flag)
+                    // el.offsetWidth
+                    el.style.transform = "translate(150px,200px)"
+                    // el.style.transition = "all 10s ease"
+                    done() // 这里回调afterEnter，为了防止会同步调用，过渡会立即完成   
+                },
+                afterEnter(el) {
+                    console.log('3' + this.flag)
+                    // 这里flag值的转变十分重要
+                    // 一方面在小球掉落之后隐藏了小球
+                    // 另一方面让 flag 从 true 变为了 false，
+                    // 立即触发了leave系列的钩子函数
+                    // 那么当下一次点击按钮时，就又变成了 true，开始新的一次生命周期
+                    this.flag = !this.flag
+                    console.log('3.1' + this.flag)
+                },
+                beforeLeave(el) {
+                    console.log('4' + this.flag)
+                },
+                leave(el) {
+                    console.log('5' + this.flag)
+                },
+                afterLeave(el) {
+                    console.log('6' + this.flag)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

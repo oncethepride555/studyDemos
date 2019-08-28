@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+    <link rel="stylesheet" href="./lib/bootstrap-3.3.7.css">
+</head>
+
+<body>
+
+    <div id="app">
+        <!-- 发表评论组件 -->
+        <!-- 把父组件的show方法传递给了子组件func -->
+        <comp v-on:func="show"></comp>
+        <!-- 评论列表 -->
+        <ul class="list-group">
+            <li class="list-group-item" v-for="item in list" :key="item.id">
+                <span class="badge">{{ item.user }}</span>
+                {{ item.content }}
+            </li>
+        </ul>
+    </div>
+
+    <template id="tmp">
+        <div>
+            <div class="form-group">
+                <label>
+                    评论人：
+                    <input type="text" class="form-control" v-model="user">
+                </label>
+            </div>
+            <div class="form-group">
+                <label>
+                    评论内容：
+                    <textarea cols="30" rows="10" class="form-control" v-model="content"></textarea>
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="button" value="发表评论" class="btn btn-primary" @click="add">
+            </div>
+        </div>
+    </template>
+
+    <script>
+        var comp = {
+            template: '#tmp',
+            data() {
+                return {
+                    user: '',
+                    content: ''
+                }
+            },
+            methods: {
+                add() {
+                    // console.log('ok')
+                    // 最新的一条评论 对象
+                    var comment = { id: Date.now(), user: this.user, content: this.content }
+                    // 在保存最新的一条评论之前，要把里边已经有的先拿到，否则就被覆盖了
+                    var list = JSON.parse(localStorage.getItem('Author') || '[]')
+                    // 把最新的一条评论放进去
+                    list.unshift(comment)
+                    // 把所有的评论保存到本地
+                    localStorage.setItem('Author',JSON.stringify(list))
+                    // 清空表单
+                    this.user = this.content = ''
+                    // 调用从父组件传递过来的func方法
+                    this.$emit('func')
+                }
+            }
+        }
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                list: []
+            },
+            methods: {
+                show(){
+                    var list = JSON.parse(localStorage.getItem('Author') || '[]')
+                    this.list = list
+                }
+            },
+            components: {
+                comp
+            },
+            beforeCreate(){
+
+            },
+            created(){
+                this.show()
+            }
+        })
+    </script>
+</body>
+
+</html>
