@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        // 1.保存数据到本地
+        // 参数一：保存的变量名；参数二：要保存的数据
+        localStorage.setItem('wss', 'nzb');
+        // 2.从本地存储获取数据
+        // localStorage.getItem('Author')
+        // 3.从本地存储删除某个数据
+        // localStorage.removeItem('Author')
+        // 4.删除所有数据
+        // localStorage.clear();
+
+        sessionStorage.setItem('Author','local');
+
+        /* 复杂数据存储 */
+        // 对象
+        var user = {
+            username:'wss',
+            age:'24'
+        };
+
+        // 将对象转换成字符串
+        user = JSON.stringify(user);
+        // 存
+        localStorage.setItem('user',user);
+        // 取，此时取出来的是字符串
+        var getUser = localStorage.getItem('user');
+        console.log(getUser);
+        console.log(typeof(getUser));
+        // 将字符串转换成对象
+        getUser = JSON.parse(getUser);
+        console.log(getUser);
+        console.log(typeof(getUser));
+    </script>
+</body>
+
+</html>

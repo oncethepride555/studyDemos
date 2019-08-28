@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h4 ref="myh4">Vue中获取DOM元素用ref</h4>
+        <input type="button" value="click me" @click="click">
+        <comp ref="mycomp"></comp>
+    </div>
+
+    <script>
+        var comp = {
+            template:'<h2>我是组件</h2>',
+            data(){
+                return {
+                    msg:'son msg'
+                }
+            },
+            methods:{
+                show(){
+                    console.log('调用了子组件中的方法')
+                }
+            }
+        }
+        var vm = new Vue({
+            el:'#app',
+            data:{},
+            methods:{
+                click(){
+                    console.log(this.$refs.myh4.innerText)
+                    console.log(this.$refs.mycomp.msg)
+                    this.$refs.mycomp.show()
+                }
+            },
+            components:{
+                comp
+            }
+        })
+    </script>
+</body>
+</html>

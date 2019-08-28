@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+    <!-- 注意：vue-resource 依赖于 vue，所以先后顺序要注意 -->
+    <!-- this 就是vue实例，vue-resource 在vue实例上挂载了一个 属性：$http，通过它，可以点出来一些方法，比如 this.$http.get    this.$http.post    this.$http.jsonp -->
+    <script src="./lib/vue-resource-1.3.4.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <input type="button" value="get请求" @click="getInfo"> -->
+        请输入关键字：<input type="text" v-model="keyword" @keyup="jsonpInfo(keyword)">
+        <ul>
+            <li v-for="r in result">{{ r }}</li>
+        </ul>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                keyword: '',
+                result: []
+            },
+            methods: {
+                jsonpInfo(keyword) {
+                    var url = 'https://www.baidu.com/sugrec?pre=1&p=3&ie=utf-8&json=1&prod=pc&from=pc_web';
+                    // 如果需要传递数据，可以使用 this.$http.get('get.php',{params : jsonData}) 格式，第二个参数 jsonData 就是传到后端的数据。
+                    this.$http.jsonp(url, {
+                        params: {
+                            wd: keyword
+                        },
+                        jsonp: 'cb'
+                    }).then(res => {
+                        // console.log(res.data)
+                        if (res.body.g) {
+                            this.result = res.body.g.map(item =>
+                                item.q
+                            )
+                        }else{
+                            this.result = []
+                        }
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
