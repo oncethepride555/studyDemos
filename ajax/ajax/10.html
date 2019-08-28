@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="ajax.js"></script>
+    <script>
+        window.onload = function(){
+            var dv1 = document.getElementById('dv1');
+            var btn1 = document.getElementById('btn1');
+            btn1.onclick = function(){
+                ajax('get','10.php','username=张三&age=12','text',function(data){//这里的data是形参
+                    dv1.innerHTML = data;
+                });
+            }
+            var dv2 = document.getElementById('dv2');
+            var btn2 = document.getElementById('btn2');
+            btn2.onclick = function(){
+                ajax('get','10-2.php','username=李四&age=13','json',function(data){
+                    dv2.innerHTML = data.username+'========'+data.age;
+                });
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="dv1"></div>
+    <input type="button" value="点击1" id="btn1">
+    <div id="dv2"></div>
+    <input type="button" value="点击2" id="btn2">
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./ajax3.js"></script>
+    <script>
+        /* 同源，处理json格式数据 */
+        // ajax({
+        //     type:'get',
+        //     url:'http://localhost/cross/data.php',
+        //     dataType:'json',
+        //     success:function(data){
+        //         console.log(data);
+        //     }
+        // })
+
+        /* jsonp 跨域 */
+        ajax({
+            url:'http://tom.com/jsonp.php',
+            dataType:'jsonp',
+            jsonp:'cb',
+            jsonpCallback:'abcde',
+            success:function(data){
+                console.log(data.username,data.password);
+            }
+        })
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

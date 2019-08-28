@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        window.onload = function () {
+            var btn = document.getElementById('btn');
+            btn.onclick = function () {
+                var username = document.getElementById('username').value;
+                var password = document.getElementById('password').value;
+                // 1.创建XMLHttpRequest对象
+                var xhr = new XMLHttpRequest();
+                // 2.准备发送
+                //xhr.open('get', './01check.php?username=' + username + '&password=' + password,true);
+                //encodeURI()用来对中文参数进行编码，防止乱码
+                var param = 'username=' + username + '&password=' + password;
+                xhr.open('get', './01check.php?' + encodeURI(param), true);
+                // 3.执行发送动作
+                xhr.send(null);
+                // 4.指定回调函数
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4) {
+                        if (xhr.status == 200) {
+                            alert(xhr.responseText);
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <form>
+        用户名：<input id="username" type="text" name="username" /><span id="info"></span> <br />
+        密码：<input id="password" type="text" name="password" /><br />
+        <input id="btn" type="button" value="提交" />
+    </form>
+</body>
+
+</html>

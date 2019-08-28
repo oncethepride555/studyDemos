@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        window.onload = function () {
+            var btn = document.getElementById('btn');
+            btn.onclick = function () {
+                var username = document.getElementById('username').value;
+                var password = document.getElementById('password').value;
+                // 1.创建XMLHttpRequest对象
+                var xhr = new XMLHttpRequest();
+                //console.log(xhr.readyState + '-------1--------');
+                // 2.准备发送
+                var param = 'username=' + username + '&password=' + password;
+                xhr.open('post', '07.php', true);
+                // 3.执行发送动作
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.send(param);
+                //console.log(xhr.readyState + '-------2--------');
+                // 4.指定回调函数
+                xhr.onreadystatechange = function () {
+                    //console.log(xhr.readyState + '-------3--------');
+                    if (xhr.readyState == 4) {
+                        if (xhr.status == 200) {
+                            var data = xhr.responseText;//得到的是json格式的数据               
+                            var d = JSON.parse(data); //json格式的数据转为对象
+                            //通过对象.属性来获取具体的内容
+                            console.log("name:" + d.name);
+                            console.log("age:" + d.age);
+                            console.log("sex:" + d.sex);
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <form>
+        用户名：<input id="username" type="text" name="username" /><span id="info"></span> <br />
+        密码：<input id="password" type="text" name="password" /><br />
+        <input id="btn" type="button" value="提交" />
+    </form>
+</body>
+
+</html>
