@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+    <link rel="stylesheet" href="./lib/bootstrap-3.3.7.css">
+</head>
+
+<body>
+    <div id="app">
+        <label class="form-inline">
+            firstname:
+            <input type="text" v-model="first" class="form-control">
+        </label>
+        <label class="form-inline">
+            lastname:
+            <input type="text" v-model="last" class="form-control">
+        </label>
+        <label class="form-inline">
+            fullname:
+            <input type="text" v-model="full" class="form-control">
+        </label>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                first: '',
+                last: '',
+                full: ''
+            },
+            watch: {
+                // 使用这个属性，可以监视 data 中指定数据的变化，然后触发 watch 中对应的 function处理函数
+                // 两个参数，分别是新值和旧指
+                // 一个对象，键是需要观察的表达式，值是对应的对调函数
+                // 不能使用箭头函数，因为其绑定了父级作用域的上下文，this不会按照期望指向vue实例
+                first:function(){
+
+                },
+                first(newVal, oldVal) {
+                    this.full = newVal + '-' + this.last
+                },
+                last(newVal) {
+                    this.full = this.first + '-' + newVal
+                }
+            }
+        })       
+    </script>
+</body>
+
+</html>
