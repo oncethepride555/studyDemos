@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<p id="p">这是需要克隆的内容</p>
+		<button onclick="cloneRange()">克隆</button>
+	</body>
+	<script>
+		function cloneRange(){
+			var p = document.getElementById("p");
+			var rangeObj = document.createRange();
+			rangeObj.selectNodeContents(p);
+			var rangeClone = rangeObj.cloneRange();
+			alert(rangeClone.toString());
+		}
+	</script>
+</html>

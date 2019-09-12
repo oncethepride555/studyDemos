@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			function draw(id) {
+				var canvas = document.getElementById(id);
+				var context = canvas.getContext("2d");
+				context.fillStyle = "#eeeeef";
+				context.fillRect(0, 0, 500, 500);//绘制已填充颜色的矩形
+				context.shadowOffsetX = -10; //设置阴影水平方向的偏移
+				context.shadowOffsetY = 10;
+				context.shadowColor = "rgba(100,100,100,0.5)";
+				context.shadowBlur = 8; //设置模糊程度
+
+				context.translate(50, 50);
+				for(var i = 0; i < 3; i++) {				
+					create5Star(context);
+					context.translate(100, 100);
+					context.fill();//fill() 方法填充当前的图像（路径）。默认颜色是黑色
+				}
+			}
+
+			//创建五角星
+			function create5Star(context) {
+				var dx = 0;
+				var dy = 0;
+				var size = 50;
+				var n = 5;
+				context.beginPath();
+				context.fillStyle = "rgba(255,0,0,0.9)";
+				var dig = 2 * (2 * Math.PI / n)
+				for(var i = 0; i < 5; i++) {
+					var x = dx + size * Math.sin(i * dig);
+					var y = dy + size * Math.cos(i * dig);
+					context.lineTo(x, y);
+				}
+				context.closePath();
+			}
+		</script>
+	</head>
+
+	<body onload="draw('canvas')">
+		<!--shadowOffsetX  偏移量水平方向，可以为负数
+			shadowOffsetY
+			shadowColor
+			shadowBlur  设置模糊程度
+		-->
+		<canvas id="canvas" width="500" height="500"></canvas>
+	</body> 
+
+</html>

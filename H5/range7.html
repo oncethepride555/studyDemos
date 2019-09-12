@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div id="div1" style="background-color: lightsalmon;height: 100px;width: 200px;">你好吗</div>
+		<div id="div2" style="background-color: deepskyblue;height: 100px;width: 200px;"></div>
+		<button onclick="move()">移动内容</button>
+	</body>
+
+	<script>
+		function move(){
+			var div1 = document.getElementById("div1");
+			var div2 = document.getElementById("div2");
+			var rangObj = document.createRange();
+			rangObj.selectNodeContents(div1);
+			var docFragment = rangObj.extractContents();
+			div2.appendChild(docFragment);
+		}
+	</script>
+</html>

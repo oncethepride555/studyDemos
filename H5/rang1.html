@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		selection对象和range对象
+		<input type="button" value="点击我" onclick="rangeTest()" />
+		<div id="showRange"></div>
+	</body>
+	<script>
+		function rangeTest() {
+			var showRange = document.getElementById("showRange");
+			var selection = document.getSelection(); //返回当前选中的内容
+			if(selection.rangeCount > 0) {
+				var html = "您选择了[" + selection.rangeCount + "]处内容<br/ >";
+				for(var i = 0; i < selection.rangeCount; i++) {
+					var range = selection.getRangeAt(i);
+					html += "第" + (i + 1) + "段内容为：" + range + "<br />";
+				}
+				showRange.innerHTML = html;
+			}
+		}
+	</script>
+
+</html>

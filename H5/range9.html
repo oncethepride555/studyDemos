@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div onmouseup="moveButton()" style="background-color: darksalmon; width:400px;">
+			这是我随便写的一些文字这是我随便写的一些文字这是我随便写的一些文字这是我随便写的一些文字这是我随便写的一些文字
+		</div>
+		<button id="button">按钮</button>
+	</body>
+	<script>
+		function moveButton(){
+			var btn = document.getElementById("button");
+			var selection = document.getSelection();
+			if(selection.rangeCount>0){//有内容
+				var range = selection.getRangeAt(0);
+				range.insertNode(btn);
+			}
+		}
+	</script>
+</html>

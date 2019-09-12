@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			function draw(id) {
+				var canvas = document.getElementById(id);
+				if(canvas == null) { //为空说明没有创建
+					return false;
+				}
+				var context = canvas.getContext("2d");
+				context.fillStyle = "#eeeeef";//指定canvas颜色
+				context.fillRect(0, 0, 600, 700);//指定canvas的位置和大小
+				for(var i = 0; i <= 10; i++) {
+					context.beginPath();//绘制路径
+					context.arc(i * 25, i * 25, i * 10, 0, Math.PI * 2, true);
+					//圆心点x y，半径，起始角度，终止角度,是否顺时针旋转
+					context.closePath();//关闭路径
+					context.fillStyle = "rgba(255,0,0,0.25)";//指定绘制样式，0.25是透明度
+					context.fill();
+					context.stroke();
+				}
+			}
+		</script>
+	</head>
+
+	<body onload="draw('canvas')">
+		<canvas id="canvas" width="600px" height="700px"></canvas>
+	</body>
+
+</html>

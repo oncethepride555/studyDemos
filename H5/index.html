@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+
+	<body>
+		<!--ol-->
+		<!--有序列表 从5开始，倒序，所以是54321-->
+		<ol start="5" reversed="reversed">
+			<li>列表1</li>
+			<li>列表2</li>
+			<li>列表3</li>
+			<li>列表4</li>
+			<li>列表5</li>
+		</ol>
+		<!--dl-->
+		<dl>
+			<dt>hhh</dt>
+			<dd>aaa</dd>
+		</dl>
+		<!--cite-->
+		<!--斜体-->
+		<cite>吴烁烁你真棒！</cite>
+		<br /><br />
+		<!--small-->
+		<small>small吴烁烁</small> 普通吴烁烁
+		<!--progress-->
+		<section>
+			<h2>progress元素的使用</h2>
+			<p>完成百分比<progress id="p1" max="100"></progress><span id="span1">0</span>%</p>
+			<input type="button" value="点击" onclick="btn()" />
+		</section>
+		<!--meter-->
+		<meter value="50" min="0" max="100" low="20" high="90" optimum="80"></meter>
+		<p>今天天气<mark>真好！</mark></p>
+		<!--detail-->
+		<details>
+			<summary>吴烁烁</summary>
+			<p>你真棒啊！</p>
+		</details>
+		
+		<figure>
+			<figcaption>图画的标题</figcaption>
+			<img src="img/map.jpg" width="300"/>
+		</figure>
+	</body>
+
+	<script>
+		function detail_onclick(detail){
+			var p = document.getElementById("p2");
+			if(detail.open){//open 属性定义details是否可见
+				p.style.visibility = "hidden";
+			}else{
+				p.style.visibility = "visible";
+			}
+		}
+		
+		function btn() {
+			var i = 0;
+
+			function thread_one() {
+				if(i < 100) {
+					i++;
+					updateProgress(i);
+				}
+			}
+			setInterval(thread_one, 1000);
+		}
+
+		function updateProgress(newValue) {
+			var progressBar = document.getElementById("p");
+			progressBar.value = newValue;
+			document.getElementById("span1").textContent = newValue;
+		}
+	</script>
+
+</html>

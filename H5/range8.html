@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="div" style="background-color: darksalmon;width: 200px;height: 200px;">我是元素中的内容</div>
+		<button onclick="selectRange()">选择元素</button>
+		<button onclick="unselect()">取消元素</button>
+		<button onclick="showRange()">显示range内容</button>
+	</body>
+	<script>
+		var rangeObj = document.createRange();
+		function selectRange(){
+			var div = document.getElementById("div");
+			rangeObj.selectNode(div);
+			alert("已选择元素中的内容");
+//			rangeObj.detach();//释放掉range对象
+		}
+		function unselect(){
+			rangeObj.collapse(false);
+			alert("已取消选择元素中的内容");
+		}
+		function showRange(){
+			alert("元素中的内容为："+rangeObj.toString());
+		}
+	</script>
+</html>

@@ -1,0 +1,264 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="keywords" content="html标签学习" />
+		<!--定时跳转，3秒后跳转到canvas.html-->
+		<!--<meta http-equiv="refresh" content="3;url=canvas.html" />-->
+		<!--统一设置超链接的打开方式-->
+		<!--<base target="_blank" />-->
+		<style type="text/css">
+			p.haha{
+				color: blue;
+			}
+			.haha{
+				color: red;
+			}
+			#hehe{
+				color: yellow;
+			}
+		</style>
+	</head>
+	<body>
+<a name="tag">顶部</a><br />
+<h2>html操作思想：使用标签把要操作的数据包起来，通过修改标签的属性值，来实现标签内数据样式的变化</h2>
+<font size="5" color="red">文字标签</font><!--行内元素-->
+<font size="5" color="red">文字标签</font>
+<!--size范围：1-7-->
+<br />
+<!--换行-->
+<!--注释标签-->
+<h1>标题标签:范围h1-h6</h1>
+<hr/>
+<!--水平线标签-->
+<!--对于特殊字符需要转义：
+	<  &lt;
+	>  &gt;
+	空格 &nbsp;-->
+<!--列表标签-->
+<dl>
+	<dt>水果</dt>
+	<dd>苹果</dd>
+	<dd>香蕉</dd>
+</dl>
+<!--无序列表 三种   circle:空心圆；disc:实心圆（默认）；square:实方框-->
+<ul type="square">
+	<li>aaa</li>
+	<li>bbb</li>
+	<li>ccc</li>
+</ul>
+<!--有序列表 五种，默认type=1-->
+<ol type="1">
+	<li>aaa</li>
+	<li>bbb</li>
+	<li>ccc</li>
+</ol>
+<ol type="a">
+	<li>aaa</li>
+	<li>bbb</li>
+	<li>ccc</li>
+</ol>
+<ol type="A">
+	<li>aaa</li>
+	<li>bbb</li>
+	<li>ccc</li>
+</ol>
+<ol type="i">
+	<li>aaa</li>
+	<li>bbb</li>
+	<li>ccc</li>
+</ol>
+<ol type="I">
+	<li>aaa</li>
+	<li>bbb</li>
+	<li>ccc</li>
+</ol>
+<img src="图片的路径" alt="文字" width="100" height="100" />
+<!--路径分为绝对路径和相对路径，相对路径有多种情况，../是上一层目录-->
+<br />
+<a href="#" target="_blank">超链接</a>
+<!--_blank在新窗口打开-->
+<!--默认target="_self",在当前页打开-->
+<table border="1" bordercolor="red" cellspacing="0" width="200" height="140">
+	<!--cellspacing 单元格之间的距离-->
+	<!--caption 表格的标题-->
+	<caption>标题</caption>
+	<!--首先数有多少行，然后看行里有多少个单元格-->
+	<tr>
+		<th>aaa</th>
+		<th>aaa</th>
+		<th>aaa</th>
+	</tr>
+	<!--th 实现了居中和加粗-->
+	<tr align="center">
+		<td>aaa</td>
+		<td>aaa</td>
+		<td>aaa</td>
+	</tr>
+	<tr align="center">
+		<td>aaa</td>
+		<td>aaa</td>
+		<td>aaa</td>
+	</tr>
+</table>
+<table border="1" bordercolor="blue" cellspacing="0" width="200">
+	<tr>
+		<td>aaa</td>
+		<td colspan="2">aaa</td>
+	</tr>
+	<tr>
+		<td rowspan="2">aaa</td>
+		<td>aaa</td>
+		<td rowspan="2">aaa</td>
+	</tr>
+	<tr>
+		<td>aaa</td>
+	</tr>
+</table>
+<!--colspan 跨列；rowspan 跨行-->
+<form action="提交到的位置" method="get" enctype="">
+	<!--envtype上传时使用-->
+	手机号：<input type="text" name="phone" />
+	<br /> 密码：
+	<input type="password" name="password" />
+	<br /> 性别：
+	<input type="radio" name="aa" value="nv" />女<input type="radio" name="aa" value="nan" />男
+	<br /> 爱好：
+	<input type="checkbox" name="hobby" value="yumao" />羽毛球<input type="checkbox" name="hobby" value="lanqiu" />篮球<input type="checkbox" name="hobby" value="ping" />乒乓球
+	<br /> 出生年：
+	<select name="year">
+		<option value="0">请选择</option>
+		<option value="1992">1992</option>
+		<option value="1993">1993</option>
+		<option value="1994">1994</option>
+		<option value="1995">1995</option>
+	</select>
+	<br /> 备注：
+	<textarea cols="10" rows="5"></textarea><br />
+	<input type="submit" value="注册" />
+	<input type="submit" />
+	<!--value不写，默认是 提交--><br />
+	<input type="reset" value="重置" /><br />
+	<input type="button" value="普通按钮" /><br />
+	<!--使用图片提交-->
+	<input type="image" src="图片路径" value="点击图片提交" /><br />
+	<input type="hidden" /><br />
+	<!--隐藏项-->
+	<input type="file" /><br />
+	<!--文件上传时使用-->
+</form>
+<h2>免费注册人人网账号</h2>
+<form action="hello.html" method="get">
+	<table border="0" cellspacing="0">
+		<tr>
+			<td align="right">注册邮箱：</td>
+			<td><input type="text" name="mail" /></td>
+		</tr>
+		<tr>
+			<td align="right">&nbsp;</td>
+			<td>你还可以使用
+				<a href="#">账号</a>注册或者
+				<a href="#">手机号</a>注册</td>
+		</tr>
+		<tr>
+			<td align="right">创建密码：</td>
+			<td><input type="password" name="passw" /></td>
+		</tr>
+		<tr>
+			<td align="right">真实姓名：</td>
+			<td><input type="text" name="truename" /></td>
+		</tr>
+		<tr>
+			<td align="right">性别：</td>
+			<td><input type="radio" name="sex" value="women" />女<input type="radio" name="sex" value="man" />男</td>
+		</tr>
+		<tr>
+			<td align="right">生日：</td>
+			<td>
+				<select name="year">
+					<option value="1991">1991</option>
+					<option value="1992">1992</option>
+					<option value="1993">1993</option>
+					<option value="1994">1994</option>
+					<option value="1995">1995</option>
+				</select>年
+				<select name="month">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+				</select>月
+				<select name="day">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+				</select>日
+			</td>
+		</tr>
+		<tr>
+			<td align="right">我现在：</td>
+			<td>
+				<select name="doing">
+					<option value="正在上学">正在上学</option>
+					<option value="正在上班">正在上班</option>
+					<option value="退休">退休</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td align="right">&nbsp;</td>
+			<td><img src="" alt="验证码" />&nbsp;&nbsp;
+				<a href="#">看不清换一张？</a>
+			</td>
+		</tr>
+		<tr>
+			<td align="right">验证码：</td>
+			<td><input type="text" name="code" /></td>
+		</tr>
+		<tr>
+			<td align="right">&nbsp;</td>
+			<td><input type="image" src="图片路径" name="imagebutton" value="立即注册找好友" /></td>
+		</tr>
+	</table>
+</form>
+<hr />
+<b>加粗</b>
+<u>下划线</u>
+<i>斜体</i>
+<s>删除线</s>
+<pre>
+	原样输出
+	aaaa
+	
+	 bbbbb
+</pre> H
+<sub>2</sub>O:sub下标 100
+<sup>2</sup>：sup上标
+<br />
+<p>书山有路勤为径</p>
+<p>学海无涯苦作舟</p>
+<p class="haha">p标签是段落标签，比br多一行</p>
+<div class="haha" id="hehe">div会</div>
+<div class="haha">自</div>
+<div>动</div>
+<div>换</div>
+<div>行</div>
+<span>span在</span>
+<span>一行</span>
+<span>显示</span>
+<br />
+<pre>
+	html中的头标签:
+	title:在标签上显示的内容
+	meta:设置页面的一些相关内容
+	base:超链接的基本设置
+	link:引入外部文件   
+</pre>
+<br />
+<a href="frame.html">框架标签</a>
+<br />
+<a href="#tag">回到顶部</a>
+</body>
+</html>

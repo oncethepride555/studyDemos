@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			function draw(id) {
+				var canvas = document.getElementById(id);
+				var context = canvas.getContext("2d");
+				context.fillStyle = "#eeeeef";
+				context.fillRect(0, 0, 300, 300);
+				//dx,dy为圆心坐标
+				var dx = 150;
+				var dy = 150;
+				var size = 100;
+				//所有的顶点都在一个圆上。圆心O为图形的中心点，半径r为中心点到任一顶点的距离,即size。
+				context.beginPath();
+				context.fillStyle = "burlywood";
+				context.strokeStyle = "#00008B"; //边框的样式
+				//n为顶点的个数，n边形
+				var n = 5;
+				//var dig = Math.PI / 15 * 11;
+				var dig = 2 * (2 * Math.PI / n);//dig是n边形相邻顶点与圆心的角度
+				//(2 * Math.PI / n)360°平均分为n份，
+				//每循环一次，能确定n边形的一个顶点的位置
+				for(var i = 0; i < n; i++) { //圆的参数方程
+					var x = dx + size * Math.sin(i * dig);
+					var y = dy + size * Math.cos(i * dig);
+					context.lineTo(x, y);
+				}
+				context.closePath();
+				context.fill();//fill() 方法填充当前的图像（路径）。默认颜色是黑色
+				context.stroke();
+			}
+		</script>
+	</head>
+
+	<body onload="draw('canvas')">
+		<canvas id="canvas" width="300px" height="300px"></canvas>
+	</body>
+
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+
+	<body>
+		<!--SelectionDirection属性的使用-->
+		<form>
+			<input id="txtid" type="text" name="text" />
+			<input type="button" value="点击我" onclick="sd()" />
+		</form>
+		<form action="http://www.bai.com" method="get">
+			<input type="text" name="greeting" autocomplete="off" list="greetings" />
+			<datalist id="greetings">
+				<option value="ddd">ddd</option>
+				<option value="aaa">aaa</option>
+			</datalist>
+			<input type="submit" />
+		</form>
+		<input type="checkbox" id="cd" />属性测试
+		<form>
+			<input type="url" value="http://www.bai.com" />
+			<input type="email" />
+			<input type="date" />
+			<input type="time" />
+			<input type="datetime" />
+			<input type="datetime-local" />
+			<input type="month" />
+			<input type="number" max="100" step="2" min="80" />
+			<input type="rang" />
+			<input type="tel" />
+			<input type="search" />
+			<input type="color" onchange="document.body.style.backgroundColor = this.value" />
+			<!--output元素的追加-->
+			<input type="range" id="range" min="0" max="100" step="1" value="10" onchange="value_change()"/>
+			<output id="output">10</output>
+			<input type="submit" />
+		</form>
+		<form>
+			<input type="number" id="num1" /> +
+			<input type="number" id="num2" /> =
+			<input type="number" id="result" readonly="readonly"/>
+			<input type="button" value="计算" onclick="add1()" />
+		</form>
+		
+		<form id="testform" onsubmit="check()" novalidate="true">
+			<!--novalidate 属性规定当提交表单时不对其进行验证。-->
+			<label for="email">邮箱：</label>
+			<input type="email" id="email" name="email" /><br />
+			<input type="submit"/>
+		</form>
+
+	</body>
+
+	<script>
+		function check(){
+			var email = document.getElementById("email");
+			if(email.value == ""){
+				alert("请输入邮箱地址");
+				return false;
+			}else if(!email.checkValidity()){//检验email格式是否合法
+				alert("请输入正确的邮箱地址");
+				return false;
+			}
+		}
+		
+		function value_change(){
+			var num = document.getElementById("range");
+			document.getElementById("output").value = num.value;
+		}
+		
+		function add1() {
+			var n1 = document.getElementById("num1").valueAsNumber;
+			var n2 = document.getElementById("num2").valueAsNumber;
+			document.getElementById("result").valueAsNumber = n1 + n2;
+		}
+
+		//设置复选框为尚未明确是否选取
+		var ind = document.getElementById("cd");
+		ind.indeterminate = true;
+
+		function sd() {
+			var control = document.getElementById("txtid");
+			var Direction = control.selectionDirection;
+			alert(Direction);
+		}
+	</script>
+
+</html>
