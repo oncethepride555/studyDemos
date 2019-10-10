@@ -3,7 +3,7 @@
     header('Cache-Control:no-cache');
 
     // date() 函数格式化本地日期和时间，并返回已格式化的日期字符串。
-    $time = date('r');
+    $time = date("h:i:s");
     
     // 输出发送日期
     // 服务端返回数据需要特殊的格式,它分为四种消息类型：event, data, id, retry
@@ -14,7 +14,11 @@
     // id为当前消息的标识符，可以不设置。
     // retry设置当前http连接失败后，重新连接的间隔。
     // 每个字段都有名称，紧接着有个”:“。当出现一个没有名称的字段而只有”:“时，这就会被服务端理解为”注释“，并不会被发送至浏览器端
-    echo "data:The server time is:{$time} \n\n";
+    echo "retry:1000\n";
+    echo "event:myevent\n";
+    echo "data:The server time is:$time \n";
+    echo "data:foo\n\n";
     // 向网页刷新输出数据
+    ob_flush();
     flush();
 ?>
