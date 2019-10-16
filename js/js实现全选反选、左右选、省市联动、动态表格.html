@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+
+	<body>
+		<input type="checkbox" id="ss1" onclick="select1()" />全选/全不选<br />
+		<input type="checkbox" name="aa" />篮球<br />
+		<input type="checkbox" name="aa" />足球<br />
+		<input type="checkbox" name="aa" />羽毛球<br />
+		<input type="button" value="全选" onclick="selectAll()" />
+		<input type="button" value="全不选" onclick="selectNone()" />
+		<input type="button" value="反选" onclick="reSelect()" />
+		<hr />
+		<br />
+		<hr />
+		<div style="float: left;margin-right: 20px;">
+			<select id="sel1" multiple="multiple" style="width: 100px;height: 100px;">
+				<option>aaa</option>
+				<option>bbb</option>
+				<option>ccc</option>
+				<option>ddd</option>
+			</select>
+			<br /><br />
+			<input type="button" value="选中添加到右边" onclick="selToRight()" /><br /><br />
+			<input type="button" value="全部添加到右边" onclick="allToRight()" />
+		</div>
+		<div>
+			<select id="sel2" multiple="multiple" style="width: 100px;height: 100px;">
+			</select><br /><br />
+			<input type="button" value="选中添加到左边" onclick="selToLeft()" /><br /><br />
+			<input type="button" value="全部添加到左边" onclick="allToLeft()" />
+		</div>
+		<hr />
+		<br /><br />
+		<hr />
+		<!--省市联动案例-->
+		<select id="ss1" onchange="add1(this.value);">
+			<option value="0">---请选择---</option>
+			<option value="北京">北京</option>
+			<option value="河北">河北</option>
+			<option value="山东">山东</option>
+			<option value="陕西">陕西</option>
+		</select>
+		<select id="ss2">
+		</select>
+		<hr />
+		<br />
+		<h3>动态生成表格</h3> 行：
+		<input type="text" name="hang" /> 列：
+		<input type="text" name="lie" /><br /><br />
+		<input type="button" value="生成" onclick="made()" />
+		<div id="div1">
+
+		</div>
+	</body>
+	<script type="text/javascript">
+		//动态生成表格
+		function made() {
+			var input1 = document.getElementsByName("hang")[0];
+			var input2 = document.getElementsByName("lie")[0];
+			var hang = input1.value;
+			var lie = input2.value;
+			var tab = "<table border='1' bordercolor='blue' width='200px' height='200px'>";
+			for(var i = 1; i <= hang; i++) {
+				tab += "<tr>";
+				for(var j = 1; j <= lie; j++) {
+					tab += "<td></td>"
+				}
+				tab += "</tr>";
+			}
+			tab += "</table>";
+			var div1 = document.getElementById("div1");
+			div1.innerHTML = tab;
+		}
+
+		//创建一个二维数组来存储数据
+		var arr = new Array(4);
+		arr[0] = ["北京", "昌平区", "海淀区", "朝阳区", "房山区"];
+		arr[1] = ["河北", "河北", "河北", "河北", "河北"];
+		arr[2] = ["山东", "山东", "山东", "山东", "山东"];
+		arr[3] = ["陕西", "陕西", "陕西", "陕西", "陕西"];
+
+		function add1(val) {
+			var ss2 = document.getElementById("ss2");
+			//添加之前先判断ss2中是否有option
+			var options1 = ss2.getElementsByTagName("option");
+			for(var i = 0; i < options1.length; i++) {
+				var op = options1[i];
+				//删除option
+				ss2.removeChild(op);
+				i--;
+			}
+
+			for(var i = 0; i < arr.length; i++) {
+				var arr1 = arr[i]; //arr是二维数组，得到的arr1仍是数组
+				var firstarr = arr1[0];
+				if(firstarr == val) {
+					for(var j = 1; j < arr1.length; j++) {
+						var array1 = arr1[j]; //得到城市名称
+						//alert(array1);
+						var op1 = document.createElement("option");
+						var text1 = document.createTextNode(array1);
+						op1.appendChild(text1);
+						ss2.appendChild(op1);
+					}
+				}
+			}
+
+		}
+
+		function selToRight() {
+			var sel1 = document.getElementById("sel1");
+			var sel2 = document.getElementById("sel2");
+
+			var options = sel1.getElementsByTagName("option");
+			//在循环向右添加的过程中，options.length在不断减少，而i在不断增加，会出问题，有的循环不到
+			//解决方法是让i一直为0
+			for(var i = 0; i < options.length; i++) {
+				if(options[i].selected == true) {
+					sel2.appendChild(options[i]);
+					i--;
+				}
+			}
+		}
+
+		function allToRight() {
+			var sel1 = document.getElementById("sel1");
+			var options = sel1.getElementsByTagName("option");
+			for(var i = 0; i < options.length; i++) {
+				sel2.appendChild(options[i]);
+				i--;
+			}
+		}
+
+		function selToLeft() {
+			var sel2 = document.getElementById("sel2");
+			var options2 = sel2.getElementsByTagName("option");
+			var sel1 = document.getElementById("sel1");
+			for(var i = 0; i < options2.length; i++) {
+				if(options2[i].selected == true) {
+					sel1.appendChild(options2[i]);
+					i--;
+				}
+			}
+		}
+
+		function allToLeft() {
+			var sel2 = document.getElementById("sel2");
+			var options2 = sel2.getElementsByTagName("option");
+			var sel1 = document.getElementById("sel1");
+			for(var i = 0; i < options2.length; i++) {
+				sel1.appendChild(options2[i]);
+				i--;
+			}
+		}
+
+		var aa = document.getElementsByName("aa");
+
+		//全选/全不选
+		function select1() {
+			var ss1 = document.getElementById("ss1");
+			if(ss1.checked == true) {
+				selectAll();
+			} else {
+				selectNone();
+			}
+		}
+
+		//全选
+		function selectAll() {
+			for(var i = 0; i < aa.length; i++) {
+				aa[i].checked = true;
+			}
+		}
+
+		//全不选
+		function selectNone() {
+			for(var i = 0; i < aa.length; i++) {
+				aa[i].checked = false;
+			}
+		}
+
+		//反选
+		function reSelect() {
+			for(var i = 0; i < aa.length; i++) {
+				if(aa[i].checked == true) {
+					aa[i].checked = false;
+				} else if(aa[i].checked == false) {
+					aa[i].checked = true;
+				}
+			}
+		}
+	</script>
+
+</html>

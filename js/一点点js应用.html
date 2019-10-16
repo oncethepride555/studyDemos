@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>js</title>
+		<style type="text/css">
+			#div1 {
+				width: 200px;
+				height: 200px;
+				border: 1px solid blue;
+			}
+			
+			#div2 {
+				width: 200px;
+				height: 200px;
+				border: 1px solid red;
+			}
+			
+			#div3 {
+				width: 200px;
+				height: 200px;
+				border: 2px dashed yellow;
+			}
+			
+			#div11 {
+				width: 200px;
+				height: 200px;
+				border: 1px solid forestgreen;
+			}
+			
+			#div22 {
+				width: 200px;
+				height: 200px;
+				border: 1px solid salmon;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="div22">
+			<!--此处动态显示时间-->
+		</div>
+		<span id="span1">hahahaha</span>
+
+		<div id="div11">
+
+		</div>
+		<div id="div1">
+			<ul id="ul1">
+				<li id="li1">aaa</li>
+				<li id="li2">bbb</li>
+			</ul>
+		</div>
+		<div id="div2">
+
+		</div>
+		<div id="div3">
+
+		</div>
+		<input type="button" value="添加" onclick="add1();" />
+		<input type="button" value="插入" onclick="insert1()" />
+		<input type="button" value="删除" onclick="remove1()" />
+		<input type="button" value="替换" onclick="replace1()" />
+		<input type="button" value="复制" onclick="clone1()" />
+	</body>
+	<script type="text/javascript">
+		var div22 = document.getElementById("div22");
+		function getDate1() {
+			var date = new Date();
+			var newdate = date.toLocaleString();			
+			div22.innerHTML = newdate;
+		}
+		setInterval("getDate1();",1000);
+
+		//获取id为span1的span标签中的内容
+		var span1 = document.getElementById("span1");
+		//alert(span1.innerHTML);
+
+		//向id为div11的div中设置<h1>笑一笑</h1>
+		var div11 = document.getElementById("div11");
+		div11.innerHTML = "<h1>笑一笑</h1>";
+
+		function add1() {
+			var ul1 = document.getElementById("ul1");
+			var div2 = document.getElementById("div2");
+			div2.appendChild(ul1);
+		}
+
+		function insert1() {
+			//在bbb之前添加ccc
+			var li2 = document.getElementById("li2");
+			var li3 = document.createElement("li");
+			var text3 = document.createTextNode("ccc");
+			li3.appendChild(text3);
+			var ul1 = document.getElementById("ul1");
+			ul1.insertBefore(li3, li2);
+		}
+
+		function remove1() {
+			//删除bbb
+			var li2 = document.getElementById("li2");
+			var ul1 = document.getElementById("ul1");
+			ul1.removeChild(li2);
+		}
+
+		function replace1() {
+			//把aaa替换成sss
+			var li1 = document.getElementById("li1");
+			var li3 = document.createElement("li");
+			var text3 = document.createTextNode("sss");
+			li3.appendChild(text3);
+			var ul1 = document.getElementById("ul1");
+			ul1.replaceChild(li3, li1);
+		}
+
+		function clone1() {
+			//把ul列表复制到div3中
+			var div3 = document.getElementById("div3");
+			var ul1 = document.getElementById("ul1");
+			div3.appendChild(ul1.cloneNode(true));
+		}
+	</script>
+
+</html>
