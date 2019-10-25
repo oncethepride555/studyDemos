@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var name = "123";
+        var obj = {
+            name: 'netease',
+            that: this, //这里的this指向window,控制台输出window对象内的信息
+            print1: function () {
+                return () => {
+                    console.log(this.name); // 这里的箭头函数是在print1函数作用域内声明的，
+                    // this绑定在print1函数所在的上下文中，即obj
+                }
+            },
+            print2: () => {
+                console.log(this.name); // 箭头函数的this是静态的，只需要看函数是在什么函数作用域下声明的，
+                // this就会绑定在这个函数的上下文中。
+                // 这里的箭头函数并没有在哪个函数里声明，所以 this 会 fallback 到全局
+            }
+        }
+        console.log(obj.that);     // 控制台输出 window 对象内的信息
+        obj.print1()();            // 输出 netease  ，这个就相当于下面的aa()
+        var aa = obj.print1();   // 把箭头函数赋值给了aa
+        console.log(aa);
+        /* 
+        console.log(aa);输出的内容如下：
+        () => {  
+            console.log(this.name);
+        }
+        */
+        aa();  // netease  相当于运行箭头函数
+
+        obj.print2();  // 123   window.name  全局中的name
+
+        let foo04 = () => {
+            console.log(this); //该箭头函数没有在哪个函数作用域内声明，所以this指向全局对象window
+        }
+        foo04(); // window对象内的信息
+
+        // 普通函数中的this
+        function foo05() {
+            console.log(this);
+        }
+        foo05();  // 浏览器中运行，控制台输出window对象内部的信息
+
+        var obj01 = {
+            name:'wss',
+            foo06:function(){
+                console.log(this); // {name: "wss", foo06: ƒ}
+                console.log(this.name); // wss
+            }
+        }
+        obj01.foo06(); // obj01调用了函数，所以函数中的this指向obj01
+    </script>
+</body>
+
+</html>
