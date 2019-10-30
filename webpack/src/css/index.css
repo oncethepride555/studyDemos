@@ -1,0 +1,15 @@
+li{
+    list-style: none;
+}
+
+.box1{
+    width:200px;
+    height: 300px;
+    background:url('../images/brown.png')
+}
+
+.box2{
+    width:200px;
+    height: 300px;
+    background:url('../images2/brown.png')
+}

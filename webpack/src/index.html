@@ -6,11 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <!-- 注意：不推荐直接在这里引用任何包和任何css文件 -->
+    
     <!-- 因为 main.js 中的代码涉及到了 ES6 的新语法，但是浏览器不识别 -->
     <!-- <script src="./main.js"></script> -->
     <!-- 所以需要通过 webpack 前端构建工具，把 main.js 做一个处理，生成一个bundle.js文件 -->
     <!-- <script src="../dist/bundle.js"></script> -->
-    <script src="/bundle.js"></script>
+    
+    <!-- 通过一个插件 html-webpack-plugin 来在内存中生成一个与当前页面相同的页面 -->
+    <!-- 并且自动把 打包好的 bundle.js 注入到页面最底部 -->
+    <!-- <script src="/bundle.js"></script> -->
+    
+    <!-- 会发起二次请求，不推荐 -->
+    <!-- <link rel="stylesheet" href="CSS/index.css"> -->
 </head>
 <body>
     <ul>
@@ -19,11 +26,11 @@
         <li>这是第3个li</li>
         <li>这是第4个li</li>
         <li>这是第5个li</li>
-        <li>这是第6个li</li>
-        <li>这是第7个li</li>
-        <li>这是第8个li</li>
-        <li>这是第9个li</li>
-        <li>这是第10个li</li>
     </ul>
+    <button type="button" class="btn btn-default btn-lg">
+        <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> 小心心
+    </button>
+    <div class="box1"></div>
+    <div class="box2"></div>
 </body>
 </html>
