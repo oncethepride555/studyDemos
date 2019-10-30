@@ -13,9 +13,15 @@ import './css/index.scss'
 
 import 'bootstrap/dist/css/bootstrap.css'
 
-$(function(){
-    $('li:odd').css('backgroundColor','pink')
-    $('li:even').css('backgroundColor',function(){
+$(function () {
+    $('li:odd').css('backgroundColor', 'pink')
+    $('li:even').css('backgroundColor', function () {
         return '#' + 'D97634'
     })
 })
+
+class Person {
+    static info = { name: 'wss', age: 24 }
+}
+
+console.log(Person.info)

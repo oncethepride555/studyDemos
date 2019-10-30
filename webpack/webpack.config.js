@@ -14,9 +14,9 @@ module.exports = {
         filename: 'bundle.js' // 指定输出文件的名称
     },
     plugins: [ // 配置插件的节点
-        
+
         new htmlWebpackPlugin({
-            template: path.resolve(__dirname,'./src/index.html'), // 指定模板文件路径
+            template: path.resolve(__dirname, './src/index.html'), // 指定模板文件路径
             filename: 'index.html' // 指定生成的内存页面的名称
         })
     ],
@@ -29,9 +29,11 @@ module.exports = {
             // 配置处理 .scss 文件的第三方loader规则
             { test: /\.scss$/, use: ['style-loader', 'css-loader', 'sass-loader'] },
             // 配置 图片路径 的第三方loader规则
-            { test: /\.(png|jpg|jpeg|gif|bmp)$/, use: 'url-loader?limit=1&name=[hash:8]-[name].[ext]'},
+            { test: /\.(png|jpg|jpeg|gif|bmp)$/, use: 'url-loader?limit=1&name=[hash:8]-[name].[ext]' },
             // 配置 字体 路径
-            { test: /\.(woff|woff2|ttf|eot|svg)$/, use: 'url-loader'}
+            { test: /\.(woff|woff2|ttf|eot|svg)$/, use: 'url-loader' },
+            // 配置 babel
+            { test: /\.js$/, use: 'babel-loader', exclude: /node_modules/ }
         ]
     }
 }
