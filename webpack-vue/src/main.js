@@ -26,3 +26,9 @@ var vm = new Vue({
     // 简写：
     render: c => c(login)
 })
+
+import m1, { a1 as a11,a2 } from './test.js'
+
+console.log(m1)
+console.log(a11)
+console.log(a2)
