@@ -10,6 +10,8 @@ export default {
 }
 </script>
 
-<style lang="">
-    
+<style scoped>
+    div{
+        color: saddlebrown;
+    }
 </style>
