@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h1>当前数量为：{{ $store.state.count }}</h1>
+    <!-- <h1>当前数量为：{{ $store.state.count }}</h1> -->
+    <h1>{{ $store.getters.strfun }}</h1>
   </div>
 </template>
 
