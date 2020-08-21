@@ -10,11 +10,15 @@
         .inner {
             height: 150px;
             background-color: darkcyan;
+            margin: 100px;
         }
 
         .outer {
+            /* overflow: hidden; */
+            height: 180px;
+            width: 700px;
             background-color: #ff0000;
-            padding: 30px;
+            /* padding: 30px; */
         }
     </style>
     <script src="./lib/vue-2.4.0.js"></script>
@@ -28,6 +32,7 @@
         <!-- 冒泡机制，由内而外，先button，后div，div的事件是由于冒泡机制被动触发的 -->
         <div class="inner" @click="divHandler">
             <input type="button" value="戳他" @click.stop="btnHandler">
+            <!-- 只触发按钮的点击事件 -->
         </div>
 
         <!-- .prevent 阻止默认行为 -->
@@ -42,10 +47,11 @@
         <!-- .self 只有点击当前元素的时候，才会触发事件处理函数  不会因为冒泡机制而被动触发-->
         <div class="inner" @click.self="divHandler">
             <input type="button" value="戳他" @click="btnHandler">
+            <!-- 点击戳他时，只触发按钮的点击事件 -->
         </div>
 
         <!-- .once 只触发一次事件 -->
-        <!-- 这里 .prevent 只有一次起作用；linkClick事件也只触发了一次 -->
+        <!-- 这里.once 既控制了 .prevent 只有一次起作用；又控制了 linkClick事件也只触发了一次 -->
         <!-- .prevent.once 位置可以互换  .once.prevent  效果不受影响 -->
         <a href="http://www.baidu.com" @click.prevent.once="linkClick">有问题，去百度</a>
 
