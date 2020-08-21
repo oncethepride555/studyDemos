@@ -30,6 +30,7 @@
                 //ES6中的写法
                 lang() {
                     //不等于 空，说明已经开启了，就不能再开启了
+                    //跑马灯已经在动了，再点击浪起来不起作用
                     if (this.intervalId != null) return;
                     //箭头函数，解决this指向问题，箭头函数中的this和外面的this指向一致
                     this.intervalId = setInterval(() => {
@@ -39,7 +40,7 @@
                         var end = this.msg.substring(1)
                         //重新拼接得到新的字符串，并赋值给 this.msg
                         this.msg = end + start
-                    }, 400)
+                    }, 1000)//每1000毫秒走一个字
                 },
                 stop() {
                     clearInterval(this.intervalId)
