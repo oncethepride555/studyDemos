@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>清除浮动</title>
+    <style>
+        #top {
+            background-color: brown;
+        }
+        
+        /* 清除浮动代码 */
+        #top:after {
+            display: block;
+            clear: both;
+            content: "";
+            visibility: hidden;
+            height: 0
+        }
+
+        /* 清除浮动代码，针对ie8以下浏览器 */
+        /* #top {
+            zoom: 1;
+        } */
+
+        #left {
+            float: left;
+            width: 200px;
+            height: 200px;
+            background-color: #eaed33;
+        }
+
+        #right {
+            float: right;
+            width: 200px;
+            height: 200px;
+            background-color: #39ad39;
+        }
+
+        #bottom {
+            margin-top: 10px;
+            width: 100%;
+            height: 400px;
+            background-color: rgb(70, 70, 194);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="top">
+        <div id="left">left</div>
+        <div id="right">right</div>
+    </div>
+    <div id="bottom"></div>
+</body>
+
+</html>
