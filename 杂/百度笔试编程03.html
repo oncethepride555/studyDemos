@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="jsContainer">
+        <ul class="js-test" id="jsParent">
+            <li data-index="0">1</li>
+            <li data-index="1">2</li>
+        </ul>
+        <span style="font-weight: bold;">3</span>
+        4
+    </div>
+</body>
+
+</html>
+<script>
+    function dom2json() {
+        var node = document.getElementById('jsContainer');
+        // return node.nodeName; // div
+        // return node.childNodes.item(3).nodeName; // span
+        // return node.attributes.item(0); // id="jsContainer"
+        // return node.attributes.item(0).nodeName; // id
+        // return node.attributes.item(0).nodeValue; // jsContainer
+        /* var obj = {};
+        if(node.nodeType == 1){
+            if(node.attributes.length > 0){
+                for(var i = 0; i < node.attributes.length; i++){
+                    var attribute = node.attributes.item(i);
+                    obj["children"][attribute.nodeName] = attribute.nodeValue; 
+                }
+                
+            }
+        }else if(node.nodeType == 3){
+            obj["children"] = node.nodeValue.trim();
+        }
+        return obj; */
+    }
+    console.log(dom2json());
+</script>

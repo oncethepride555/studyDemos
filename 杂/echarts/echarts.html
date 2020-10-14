@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="echarts.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="t_data"></div>
+</body>
+</html>
+<script>
+    var myChart = echarts.init(document.getElementById('t_data'));//获取容器
+    myChart.setOption({
+        title: {
+            text: '热门目的地',
+            subtext: '让你更好地选择目的地',
+            top: 20,
+            left: 20,
+            textStyle: {
+                fontSize: 26,
+            }
+        },
+        toolbox: {
+            top: 20,
+            right: 100,
+            show: true,
+            feature: {
+                dataView: {
+                    show: false
+                },
+                restore: {
+                    show: false
+                },
+                dataZoom: {
+                    show: false
+                },
+                saveAsImage: {
+                    show: false
+                },
+                magicType: {
+                    type: ['line', 'bar']
+                }
+            }
+        },
+        tooltip: {},
+        legend: {//图例
+            top: 20,
+            data: ['旅游人次（亿人次）']
+        },
+        grid: {
+            top: 100,
+        },
+        xAxis: {
+            data: []
+        },
+        yAxis: {},
+        series: [{
+            name: '旅游人次（亿人次）',
+            type: 'bar',
+            data: []
+        }]
+    });
+    //异步加载json格式数据
+    $.getJSON('client.php',function(data) {
+        myChart.setOption({
+            xAxis: {
+                data: data.city
+            },
+            series: [{
+                // 根据名字对应到相应的系列
+                name: '旅游人次（亿人次）',
+                data: data.data
+            }]
+        });
+    });
+</script>
