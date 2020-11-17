@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>垂直水平居中</title>
+    <style>
+        .parent{
+            /* 公共代码 */
+            width: 200px;
+            height: 200px;
+            border: 1px solid red;
+            /* 方法3-1：table布局 */
+            /* display: table-cell;
+            text-align: center;
+            vertical-align: middle; */
+            /* 方法2-1：子绝父相 */
+            /* position: relative; */
+            /* 方法1：flex布局 */
+            /* display: flex;
+            justify-content: center;
+            align-items: center; */
+            /* grid */
+            /* display: grid; */
+            /* line-height: 200px; */
+            text-align: center;
+            line-height: 200px;            
+        }
+        .son{
+            /* calc 属性 */
+            /* top: calc(50% - 90px);
+            left: calc(50% - 50px); */
+            /* 方法3-2：table布局 */
+            /* display: inline-block; */
+            /* 方法2-2：子绝父相 */
+            /* position:absolute; */
+            /* 子绝父相另一种设置，margin auto */
+            /* top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto; */
+            /* 公共代码 */
+            width: 100px;
+            height: 100px;
+            border: 1px solid blue;
+            /* 方法2-3：子绝父相 */
+            /* left: 50%;
+            top:50%;
+            transform: translate(-50%,-50%); */
+            /* grid */
+            /* align-self: center;
+            justify-self: center; */
+            display: inline-block;
+            /* line-height: 180px; */
+            vertical-align: middle;
+            /* 设置line-height为默认值 */
+            /* line-height: initial; */
+        }
+        .text{
+            /* 方法3：table布局，子元素设置为行内块元素 */
+            /* display: inline-block; */
+            /* 方法二：子绝父相 */
+            /* position:absolute; */
+            /* 子绝父相另一种设置，margin auto */
+            /* top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            text-align: center; */
+            /* left: 50%;
+            top:50%;
+            transform: translate(-50%,-50%); */
+            /* grid */
+            /* align-self: center;
+            justify-self: center; */
+        }
+    </style>
+</head>
+<body>
+    <div class="parent">
+        <div class="son"></div>
+        <!-- <span class="text">哈哈哈</span> -->
+    </div>
+</body>
+</html>

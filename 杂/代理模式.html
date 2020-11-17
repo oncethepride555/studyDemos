@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 获取路径
+        const myImage = (()=>{
+            const imgDom = document.getElementById('img');
+            return {
+                setSrc(src){
+                    imgDom.src = src;
+                }
+            }
+        })();
+        // 代理对象
+        const proxy = (()=>{
+            const image = new Image();
+            image.onload = function(){
+                myImage.setSrc(this.src);
+            }
+            return{
+                setSrc(src){
+                    myImage.setSrc('loading.gif');
+                    image.src = src;
+                }
+            }
+        })();
+        proxy.setSrc('main.jpg');
+        proxy.setSrc('main_2.jpg');
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        /* #content{ */
+            /* display:flex; */
+            /* display: table;
+            width: 100%; */
+        /* } */
+        #left {
+            /* 脱离文档流 */
+            float: left;
+            /* position: absolute;
+            left: 0;
+            top: 0; */
+            /* display: table-cell; */
+            width: 200px;
+            height: 800px;
+            background: red;
+        }
+        #right {
+            /* flex:1; */
+            /* margin-left: 200px; */
+            /* display: table-cell; */
+            height: 800px;
+            float: left;
+            width: calc(100% - 200px);
+            background: blue;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="content">
+        <div id="left"></div>
+        <div id="right"></div>
+    </div>
+
+</body>
+
+</html>

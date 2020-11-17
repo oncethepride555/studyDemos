@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .nav-head {
+            width: 300px;
+            height: 40px;
+            margin: auto;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px 1px #eef1f5;
+            border-radius: 14px 14px 0 0;
+        }
+
+        .nav-content {
+            width: 300px;
+            height: 200px;
+            margin: auto;
+            box-shadow: 0 0 5px 1px #dde7f5;
+            background-color: cornflowerblue;
+            border-radius: 0 0 14px 14px;
+        }
+
+        ul {
+            list-style: none;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 6px 0 0 0;
+            margin: 0;
+        }
+
+        .f {
+            float: left;
+        }
+
+        li {
+            font-size: 18px;
+            color: #474747;
+        }
+
+        .active {
+            background-color: cornflowerblue;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .inline {
+            display: inline;
+        }
+        .ser-btn{
+            float: left;
+            width: 100px;
+            height: 100px;
+            box-shadow: 0 0 5px 1px #dde7f5;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav">
+        <div class="nav-head">
+            <ul>
+                <li id="chi" class="f active" onclick="tap(this)">语文</li>
+                <li id="math" class="f" onclick="tap(this)">数学</li>
+                <li id="eng" onclick="tap(this)">英语</li>
+            </ul>
+        </div>
+        <div class="nav-content">
+            <div id="chi-con">
+                <div>一年级语文</div>
+                <div class="ser-btn">开启服务</div>
+            </div>
+            <div id="math-con" hidden>
+                一年级数学
+            </div>
+            <div id="eng-con" hidden>
+                一年级英语
+            </div>
+        </div>
+    </div>
+    <script>
+        function tap(obj) {
+            if (obj.id === 'math') {
+                document.getElementById('math-con').removeAttribute('hidden');
+                document.getElementById('chi-con').setAttribute('hidden', 'hidden');
+            }
+        }
+    </script>
+</body>
+
+</html>

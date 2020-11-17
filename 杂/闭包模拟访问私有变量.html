@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 计数器
+        function counter(initial){
+            var i = initial || 0; // 模拟的私有变量
+            function changeNum(num){
+                i += num;
+            }
+            return {
+                increase(){
+                    changeNum(5);
+                    return i;
+                }
+            }
+        }
+        var c = counter(10);
+        console.log(c.increase()); // 15
+        console.log(c.increase()); // 20
+        console.log(c.increase()); // 25
+        console.log(c.increase()); // 30
+    </script>
+</body>
+</html>

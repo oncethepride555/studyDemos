@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #menu{
+            width: 200px;
+            height: 50px;
+            background-color: #aeaeae;
+        }
+        #content{
+            width: 200px;
+            height: 400px;
+            background-color: #a3e566;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div>
+
+    </div>
+    <div id="menu">点我展开菜单</div>
+    <div id="content">菜单详细内容</div>
+    <script>
+        document.addEventListener('click',(e)=>{
+            let target = e.target;
+            let content = document.getElementById('content');
+            switch(target.id){
+                case 'menu': // 点击的是菜单，菜单内容就展开
+                    content.style.display = 'block';
+                    break;
+                case '': // 点击的是其他部分，菜单内容就隐藏
+                    content.style.display = 'none';
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let cloneObj = function (obj) {
+            let str, newobj = obj.constructor === Array ? [] : {};
+            if (typeof obj !== 'object') { // obj的类型是object才往下继续
+                return;
+            } else if (window.JSON) {
+                str = JSON.stringify(obj), //系列化对象
+                newobj = JSON.parse(str); //还原
+            } else {
+                for (var i in obj) {
+                    newobj[i] = typeof obj[i] === 'object' ?
+                    cloneObj(obj[i]) : obj[i];
+                }
+            }
+            return newobj;
+        };
+
+        let arr1 = [1, { a: 1 }];
+        let arr2 = cloneObj(arr1);
+        console.log(arr2);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+  // ----------------------第一题：考察this指向，call,apply,bind----------------
+  /*   window.val = 1;
+    var json = {
+      val: 10,
+      dbl: function () {
+        this.val *= 2;
+      }
+    };
+  
+    json.dbl();
+    // alert(json.val); // 20
+    var dbl = json.dbl;
+    dbl();
+    // alert(window.val); // 2
+    json.dbl.call(window); 
+    // alert(window.val); // 4
+    alert(window.val + json.val); // 24 */
+
+  /*   var name = '小王',age = 17;
+    var obj = {
+      name:'小张',
+      objAge:this.age,
+      myFun:function(){
+        console.log(this.name + '年龄' + this.age);
+      }
+    }
+  console.log(obj.objAge); // 17 对象中的this指向window【注意不是函数中】
+  obj.myFun();  // 小张年龄undefined -----this指向的是obj */
+
+
+  /* var x = 'window中的x'
+  var obj = {
+    x: 456,
+    fn: function () {
+      console.log('fn', this.x) // fn 456
+      var f1 = function () {
+        console.log('fn.f1', this.x) // window中的x
+        var f2 = function () {
+          console.log('fn.f2', this.x) // window中的x
+        }
+        f2()
+      }
+      f1()
+    }
+  }
+  obj.fn()
+  // 总结：
+  // 对象中的函数中的this指向该对象，
+  // 对象中的函数中的子孙函数中的this指向window */
+
+  //---------------------------第二题：考察原型、原型链---------------------
+
+  /* function C1(name) { if (name) this.name = name; }
+  function C2(name) { this.name = name; }
+  function C3(name) { this.name = name || 'John'; }
+  C1.prototype.name = 'Tom';
+  C2.prototype.name = 'Tom';
+  C3.prototype.name = 'Tom';
+  console.log((new C1().name) + (new C2().name) + (new C3().name)); */
+
+</script>

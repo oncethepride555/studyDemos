@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 单行省略号 */
+        .s {
+            width: 200px;
+            /* 设置一个宽度 */
+            white-space: nowrap;
+            /* 强制在一行显示 */
+            overflow: hidden;
+            /* 超出隐藏 */
+            text-overflow: ellipsis;
+            /* 省略号 */
+        }
+
+        .ss {
+            width: 200px;
+            overflow: hidden; /* 超出部分隐藏 */
+            display: -webkit-box; /* 展示为弹性伸缩盒子 */
+            -webkit-line-clamp: 2; /* 在块元素中显示的文本行数 */
+            -webkit-box-orient: vertical; /* 设置伸缩盒子对象的子元素的排列方式 */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="s">发现问题，解决问题，不要绕开问题的本身；多做事情，不会吃亏，即使不是你的事情。</div>
+    <hr>
+    <div class="ss">
+        发现问题，解决问题，不要绕开问题的本身；多做事情，不会吃亏，即使不是你的事情。发现问题，解决问题，不要绕开问题的本身；多做事情，不会吃亏，即使不是你的事情。发现问题，解决问题，不要绕开问题的本身；多做事情，不会吃亏，即使不是你的事情。发现问题，解决问题，不要绕开问题的本身；多做事情，不会吃亏，即使不是你的事情。发现问题，解决问题，不要绕开问题的本身；多做事情，不会吃亏，即使不是你的事情。
+    </div>
+</body>
+
+</html>

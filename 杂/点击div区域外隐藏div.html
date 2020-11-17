@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .wraper {
+            width: 400px;
+            height: 400px;
+            border: 1px solid #000;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .menu_zone {
+            width: 50%;
+            height: 50px;
+            background: #aaa;
+        }
+
+        .model_zone {
+            position: absolute;
+            width: 50%;
+            height: 200px;
+            background: #cac;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wraper">
+        <div id="menu" class="menu_zone">点击我显示菜单</div>
+        <div id="model" class="model_zone">我是菜单</div>
+    </div>
+    <script>
+        function $(id) {
+            return document.getElementById(id)
+        }
+        var oMenu = $("menu"),
+            oModel = $("model");
+        document.onclick = function () {
+            oModel.style.display = "none";
+        }
+        
+        // 方法一：使用dom0方式
+        // oMenu.onclick = function(e){
+        //     stopFunc(e);
+        //     oModel.style.display = "block";
+        // }
+        // oModel.onclick = function(e){
+        //     stopFunc(e);
+        // }
+
+        //方法二：使用dom2方式
+        oMenu.addEventListener('click', function (e) {
+            stopFunc(e);
+            oModel.style.display = "block";
+        }, false)
+        oModel.addEventListener('click', function (e) {
+            stopFunc(e);
+        }, false)
+        
+        //阻止事件向上传递
+        function stopFunc(e) { 
+            e.stopPropagation ? e.stopPropagation() : e.cancelBubble = true;
+        }
+    </script>
+</body>
+
+</html>

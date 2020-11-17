@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input v-model='b' />
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                a: 2
+            },
+            computed: {
+                'b': {
+                    get: function () {
+                        return this.a + 1;
+                    },
+                    set: function (newValue) {
+                        this.a = parseInt(newValue);
+                    }
+                }
+            }
+        })
+        vm.b = '888'
+    </script>
+</body>
+
+</html>

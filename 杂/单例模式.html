@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Singleton(name){
+            this.name = name;
+        }
+        Singleton.prototype.getName = function(){
+            return this.name;
+        }
+        // 获取实例
+        var getInstance = (()=>{
+            var instance; 
+            return function(name){ // 闭包，用到了instance，在外头是没法改这个instance的
+                return instance || (instance = new Singleton(name));
+            }
+        })();
+
+        /* var instance; 
+        var getInstance = function(name){
+            return instance || (instance = new Singleton(name));
+        }
+       // 没有闭包的话，var instance 只能在全局声明，（在函数内声明的话，instance每次都为空），这样的话，可以在外面改变instance的值，如果让instance = null，就又可以创建新的实例了。
+       // 而利用闭包就可以实现只创建一个实例。 */
+
+        const s1 = getInstance('a');
+        console.log(s1.getName()); //a
+        const s2 = getInstance('b');
+        console.log(s2.getName()); //a
+        console.log(s1 === s2); //true 只有一个实例
+    </script>
+</body>
+</html>
