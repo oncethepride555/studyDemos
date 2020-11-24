@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './index.css'
 
 // 函数组件
 /* function Clock(props) {
@@ -189,6 +190,63 @@ class LoginControl extends React.Component{ // 有状态的组件 LoginControl�
     }
 }
 
+// 与运算符 &&  进行元素的条件渲染
+// 原理：true && expression 总是返回 expression； false && expression 总是返回 false
+function MailBox(props){
+    const unreadMessage = props.unreadMessage;
+    return(
+        <div>
+            <h1>MailBox</h1>
+            {unreadMessage.length > 0 && 
+            <h2>
+                You have {unreadMessage.length} unread messages.
+            </h2>
+            }
+        </div>
+    )
+}
+
+// 阻止组件的渲染
+// <WarningBanner /> 会根据 prop 中 warn 的值来进行条件渲染。如果 warn 的值是 false，那么组件则不会渲染:
+
+function WarningBanner(props){
+    if(!props.warn){
+        return null;
+    }
+    return(
+        <div className="warning">
+            Warning!
+        </div>
+    )
+}
+
+class Page extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {showWarning: true};
+        this.handleToggleClick = this.handleToggleClick.bind(this);
+    }
+
+    handleToggleClick(){
+        this.setState(state => ({
+            showWarning: !state.showWarning
+        }))
+    }
+
+    render(){
+        return(
+            <div>
+                <WarningBanner warn={this.state.showWarning}/>
+                <button onClick={this.handleToggleClick}>
+                    {this.state.showWarning ? 'Hide' : 'Show'}
+                </button>
+            </div>
+        )
+    }
+}
+
+const messages = ['react','re:react','re:re:react'];
+
 function App() {
     return (
         <div>
@@ -196,6 +254,8 @@ function App() {
             <ActionLink />
             <Toggle />
             <LoginControl />
+            <MailBox unreadMessage={messages}/>
+            <Page />
         </div>
     )
 }
