@@ -92,11 +92,36 @@ function ActionLink() {
     );
 }
 
+// 事件处理
+class Toggle extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { isToggleOn: true };
+        // 这个绑定必不可少，为了在回调中使用this
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick() {
+        this.setState(state => ({
+            isToggleOn: !state.isToggleOn
+        }));
+    }
+
+    render() {
+        return (
+            <button onClick={this.handleClick}>
+                {this.state.isToggleOn ? 'ON' : 'OFF'}
+            </button>
+        );
+    }
+}
+
 function App() {
     return (
         <div>
             <Clock />
             <ActionLink />
+            <Toggle />
         </div>
     )
 }
