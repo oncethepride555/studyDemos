@@ -255,7 +255,7 @@ function ListItem(props){
 // 基础列表组件
 function NumberList(props){
     const numbers = props.numbers;
-    const listItem = numbers.map((number) => 
+    /* const listItem = numbers.map((number) => 
         // 为每个列表元素分配一个 key 属性，可以解决出现到警告
         // <li key={number.toString()}>
         //     {number}
@@ -265,6 +265,15 @@ function NumberList(props){
     )
     return(
         <ul>{listItem}</ul>
+    ) */
+    
+    // 在JSX中嵌入map()
+    return(
+        <ul>
+            {numbers.map((number)=>
+                <ListItem key={number.toString()} value={number} />
+            )}
+        </ul>
     )
 }
 
