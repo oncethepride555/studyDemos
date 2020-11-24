@@ -266,7 +266,7 @@ function NumberList(props){
     return(
         <ul>{listItem}</ul>
     ) */
-    
+
     // 在JSX中嵌入map()
     return(
         <ul>
@@ -275,6 +275,38 @@ function NumberList(props){
             )}
         </ul>
     )
+}
+
+// 受控组件
+class NameForm extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {value: ''};
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleChange(event) {
+        this.setState({value: event.target.value})
+    }
+
+    handleSubmit(event){
+        alert('提交的名字：' + this.state.value);
+        event.preventDefault(); // 阻止默认行为
+    }
+
+    render(){
+        return(
+            <form onSubmit={this.handleSubmit}>
+                <label>
+                    名字：
+                    <input type='text' value={this.state.value} onChange={this.handleChange}/>
+                    {/* 由于 handlechange 在每次按键时都会执行并更新 React 的 state，因此显示的值将随着用户输入而更新 */}
+                </label>
+                <input type='submit' value='提交'/>
+            </form>
+        );
+    }
 }
 
 const messages = ['react','re:react','re:re:react'];
@@ -291,6 +323,7 @@ function App() {
             <MailBox unreadMessage={messages}/>
             <Page />
             <NumberList numbers={numbers}/>
+            <NameForm />
         </div>
     )
 }
