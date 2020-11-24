@@ -309,6 +309,37 @@ class NameForm extends React.Component{
     }
 }
 
+// textarea标签
+class EssayForm extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {value: 'aaaa'};
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleChange(event){
+        this.setState({value: event.target.value});
+    }
+
+    handleSubmit(event){
+        alert('提交的文章：' + this.state.value);
+        event.preventDefault();
+    }
+
+    render(){
+        return(
+            <form onSubmit={this.handleSubmit}>
+                <label>
+                    文章：
+                    <textarea value={this.state.value} onChange={this.handleChange}/>
+                    {/* 与 input 十分类似 */}
+                </label>
+            </form>
+        )
+    }
+}
+
 const messages = ['react','re:react','re:re:react'];
 
 const numbers = [1,2,3,4,5,6,7];
@@ -324,6 +355,7 @@ function App() {
             <Page />
             <NumberList numbers={numbers}/>
             <NameForm />
+            <EssayForm />
         </div>
     )
 }
