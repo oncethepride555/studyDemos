@@ -79,11 +79,24 @@ class Clock extends React.Component {
     }
 }
 
+function ActionLink() {
+    function handleClick(e) {
+        e.preventDefault(); // 阻止默认行为
+        console.log('The link was clicked.');
+    }
+
+    return (
+        <a href="http://www.baidu.com" onClick={handleClick}>
+            Click me
+        </a>
+    );
+}
 
 function App() {
     return (
         <div>
             <Clock />
+            <ActionLink />
         </div>
     )
 }
