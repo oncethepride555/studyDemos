@@ -376,6 +376,46 @@ class FruitForm extends React.Component{
     }
 }
 
+// 处理多个输入
+// 给 input 添加 name 属性，根据 event.target.name 执行不同的操作
+class Reservation extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            isGoing:true,
+            numberOfGuests:2
+        };
+        this.handleInputChange = this.handleInputChange.bind(this);
+    }
+
+    handleInputChange(event){
+        const target = event.target;
+        const name = target.name;
+        const value = name === 'isGoing' ? target.checked : target.value;
+        
+        this.setState({
+            [name]:value
+        });
+        // [name] 计算属性名称，中括号中是表达式，计算结果作为属性名
+    }
+
+    render(){
+        return(
+            <form>
+                <label>
+                    参与：
+                    <input name='isGoing' type='checkbox' checked={this.state.isGoing} onChange={this.handleInputChange}/>
+                </label>
+                <br />
+                <label>
+                    来宾人数：
+                    <input name='numberOfGuests' type='number' value={this.state.numberOfGuests} onChange={this.handleInputChange}/>
+                </label>
+            </form>
+        )
+    }
+}
+
 const messages = ['react','re:react','re:re:react'];
 
 const numbers = [1,2,3,4,5,6,7];
@@ -393,6 +433,7 @@ function App() {
             <NameForm />
             <EssayForm />
             <FruitForm />
+            <Reservation />
         </div>
     )
 }
