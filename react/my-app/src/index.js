@@ -245,14 +245,23 @@ class Page extends React.Component{
     }
 }
 
+// 用 key 提取组件
+function ListItem(props){
+    return(
+        <li>{props.value}</li>
+    )
+}
+
 // 基础列表组件
 function NumberList(props){
     const numbers = props.numbers;
     const listItem = numbers.map((number) => 
         // 为每个列表元素分配一个 key 属性，可以解决出现到警告
-        <li key={number.toString()}>
-            {number}
-        </li>
+        // <li key={number.toString()}>
+        //     {number}
+        // </li>
+        // 这里的li可以提取为一个组件，但是key保留在这里
+        <ListItem key={number.toString()} value={number}/>
     )
     return(
         <ul>{listItem}</ul>
