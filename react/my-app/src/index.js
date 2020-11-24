@@ -79,10 +79,11 @@ class Clock extends React.Component {
     }
 }
 
+
 function App() {
     return (
         <div>
-            <Clock date={new Date()}/>
+            <Clock />
         </div>
     )
 }
