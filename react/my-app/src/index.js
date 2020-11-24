@@ -116,12 +116,86 @@ class Toggle extends React.Component {
     }
 }
 
+// 条件渲染
+
+function UserGreeting(props){
+    return(
+        <h1>Welcom back!</h1>
+    )
+}
+
+function GuestGreeting(props){
+    return(
+        <h1>Please sign in.</h1>
+    )
+}
+
+function Greeting(props){
+    const isLoggedIn = props.isLoggedIn;
+    if(isLoggedIn){
+        return <UserGreeting />
+    }
+    return <GuestGreeting />
+
+}
+
+// 元素变量
+
+// 注销和登录按钮
+function LoginButton(props){
+    return(
+        <button onClick={props.onClick}>Login</button>
+    )
+}
+
+function LogoutButton(props){
+    return(
+        <button onClick={props.onClick}>Logout</button>
+    )
+}
+
+class LoginControl extends React.Component{ // 有状态的组件 LoginControl，根据当前的状态来渲染 LoginButton 或者 LogoutButton 
+    constructor(props){
+        super(props);
+        this.handleLoginClick = this.handleLoginClick.bind(this);
+        this.handleLogoutClick = this.handleLogoutClick.bind(this);
+        this.state = {isLoggedIn: false};
+    }
+
+    handleLoginClick(){
+        this.setState({isLoggedIn: true});
+    }
+
+    handleLogoutClick(){
+        this.setState({isLoggedIn: false});
+    }
+
+    render(){
+        const isLoggedIn = this.state.isLoggedIn;
+        let button;
+        if(isLoggedIn){ // 使用 button 变量来存储元素，有条件地渲染组件的一部分
+            button = <LogoutButton onClick={this.handleLogoutClick}/> 
+        }else{
+            button = <LoginButton onClick={this.handleLoginClick}/>
+        }
+        return(
+            <div>
+                <Greeting isLoggedIn={isLoggedIn} />
+                {button}
+                {/* 三目运算符 进行元素的条件渲染 */}
+                <h3>the user is <b>{isLoggedIn ? 'currently' : 'not'}</b> logged in.</h3>
+            </div>
+        )
+    }
+}
+
 function App() {
     return (
         <div>
             <Clock />
             <ActionLink />
             <Toggle />
+            <LoginControl />
         </div>
     )
 }
