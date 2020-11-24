@@ -340,6 +340,42 @@ class EssayForm extends React.Component{
     }
 }
 
+// select标签
+class FruitForm extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {value: 'apple'};
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleChange(event){
+        this.setState({value: event.target.value});
+    }
+
+    handleSubmit(event){
+        alert('你选择的是：' + this.state.value);
+        event.preventDefault();
+    }
+
+    render(){
+        return(
+            <form onSubmit={this.handleSubmit}>
+            <label>
+                选择你喜欢的水果：
+                {/* 根 select 中的 value 属性表示选中的元素 */}
+                <select value={this.state.value} onChange={this.handleChange}>
+                    <option value='apple'>苹果</option>
+                    <option value='orange'>橙子</option>
+                    <option value='banana'>香蕉</option>
+                </select>
+            </label>
+            <input type='submit' value='提交'/>
+            </form>
+        )
+    }
+}
+
 const messages = ['react','re:react','re:re:react'];
 
 const numbers = [1,2,3,4,5,6,7];
@@ -356,6 +392,7 @@ function App() {
             <NumberList numbers={numbers}/>
             <NameForm />
             <EssayForm />
+            <FruitForm />
         </div>
     )
 }
