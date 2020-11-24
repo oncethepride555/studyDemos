@@ -245,7 +245,23 @@ class Page extends React.Component{
     }
 }
 
+// 基础列表组件
+function NumberList(props){
+    const numbers = props.numbers;
+    const listItem = numbers.map((number) => 
+        // 为每个列表元素分配一个 key 属性，可以解决出现到警告
+        <li key={number.toString()}>
+            {number}
+        </li>
+    )
+    return(
+        <ul>{listItem}</ul>
+    )
+}
+
 const messages = ['react','re:react','re:re:react'];
+
+const numbers = [1,2,3,4,5,6,7];
 
 function App() {
     return (
@@ -256,6 +272,7 @@ function App() {
             <LoginControl />
             <MailBox unreadMessage={messages}/>
             <Page />
+            <NumberList numbers={numbers}/>
         </div>
     )
 }
