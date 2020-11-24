@@ -38,6 +38,12 @@ import ReactDOM from 'react-dom';
     }
 } */
 
+// 数据向下流动 02
+// FormattedDate组件在其props中接收参数date
+function FormattedDate(props) {
+    return <h2>It is {props.date.toLocaleTimeString()}.</h2>
+}
+
 // 将生命周期方法添加到class中
 class Clock extends React.Component {
     constructor(props) {
@@ -65,7 +71,9 @@ class Clock extends React.Component {
     render() {
         return (
             <div>
-                <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+                {/* 数据向下流动 01 */}
+                {/* Clock组件将它的state作为props向下传递到自组件FormattedDate */}
+                <FormattedDate date={this.state.date} />
             </div>
         );
     }
