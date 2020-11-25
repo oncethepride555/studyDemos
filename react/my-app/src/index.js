@@ -119,21 +119,21 @@ class Toggle extends React.Component {
 
 // 条件渲染
 
-function UserGreeting(props){
-    return(
+function UserGreeting(props) {
+    return (
         <h1>Welcom back!</h1>
     )
 }
 
-function GuestGreeting(props){
-    return(
+function GuestGreeting(props) {
+    return (
         <h1>Please sign in.</h1>
     )
 }
 
-function Greeting(props){
+function Greeting(props) {
     const isLoggedIn = props.isLoggedIn;
-    if(isLoggedIn){
+    if (isLoggedIn) {
         return <UserGreeting />
     }
     return <GuestGreeting />
@@ -143,43 +143,43 @@ function Greeting(props){
 // 元素变量
 
 // 注销和登录按钮
-function LoginButton(props){
-    return(
+function LoginButton(props) {
+    return (
         <button onClick={props.onClick}>Login</button>
     )
 }
 
-function LogoutButton(props){
-    return(
+function LogoutButton(props) {
+    return (
         <button onClick={props.onClick}>Logout</button>
     )
 }
 
-class LoginControl extends React.Component{ // 有状态的组件 LoginControl，根据当前的状态来渲染 LoginButton 或者 LogoutButton 
-    constructor(props){
+class LoginControl extends React.Component { // 有状态的组件 LoginControl，根据当前的状态来渲染 LoginButton 或者 LogoutButton 
+    constructor(props) {
         super(props);
         this.handleLoginClick = this.handleLoginClick.bind(this);
         this.handleLogoutClick = this.handleLogoutClick.bind(this);
-        this.state = {isLoggedIn: false};
+        this.state = { isLoggedIn: false };
     }
 
-    handleLoginClick(){
-        this.setState({isLoggedIn: true});
+    handleLoginClick() {
+        this.setState({ isLoggedIn: true });
     }
 
-    handleLogoutClick(){
-        this.setState({isLoggedIn: false});
+    handleLogoutClick() {
+        this.setState({ isLoggedIn: false });
     }
 
-    render(){
+    render() {
         const isLoggedIn = this.state.isLoggedIn;
         let button;
-        if(isLoggedIn){ // 使用 button 变量来存储元素，有条件地渲染组件的一部分
-            button = <LogoutButton onClick={this.handleLogoutClick}/> 
-        }else{
-            button = <LoginButton onClick={this.handleLoginClick}/>
+        if (isLoggedIn) { // 使用 button 变量来存储元素，有条件地渲染组件的一部分
+            button = <LogoutButton onClick={this.handleLogoutClick} />
+        } else {
+            button = <LoginButton onClick={this.handleLoginClick} />
         }
-        return(
+        return (
             <div>
                 <Greeting isLoggedIn={isLoggedIn} />
                 {button}
@@ -192,14 +192,14 @@ class LoginControl extends React.Component{ // 有状态的组件 LoginControl�
 
 // 与运算符 &&  进行元素的条件渲染
 // 原理：true && expression 总是返回 expression； false && expression 总是返回 false
-function MailBox(props){
+function MailBox(props) {
     const unreadMessage = props.unreadMessage;
-    return(
+    return (
         <div>
             <h1>MailBox</h1>
-            {unreadMessage.length > 0 && 
-            <h2>
-                You have {unreadMessage.length} unread messages.
+            {unreadMessage.length > 0 &&
+                <h2>
+                    You have {unreadMessage.length} unread messages.
             </h2>
             }
         </div>
@@ -209,34 +209,34 @@ function MailBox(props){
 // 阻止组件的渲染
 // <WarningBanner /> 会根据 prop 中 warn 的值来进行条件渲染。如果 warn 的值是 false，那么组件则不会渲染:
 
-function WarningBanner(props){
-    if(!props.warn){
+function WarningBanner(props) {
+    if (!props.warn) {
         return null;
     }
-    return(
+    return (
         <div className="warning">
             Warning!
         </div>
     )
 }
 
-class Page extends React.Component{
-    constructor(props){
+class Page extends React.Component {
+    constructor(props) {
         super(props);
-        this.state = {showWarning: true};
+        this.state = { showWarning: true };
         this.handleToggleClick = this.handleToggleClick.bind(this);
     }
 
-    handleToggleClick(){
+    handleToggleClick() {
         this.setState(state => ({
             showWarning: !state.showWarning
         }))
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <div>
-                <WarningBanner warn={this.state.showWarning}/>
+                <WarningBanner warn={this.state.showWarning} />
                 <button onClick={this.handleToggleClick}>
                     {this.state.showWarning ? 'Hide' : 'Show'}
                 </button>
@@ -246,14 +246,14 @@ class Page extends React.Component{
 }
 
 // 用 key 提取组件
-function ListItem(props){
-    return(
+function ListItem(props) {
+    return (
         <li>{props.value}</li>
     )
 }
 
 // 基础列表组件
-function NumberList(props){
+function NumberList(props) {
     const numbers = props.numbers;
     /* const listItem = numbers.map((number) => 
         // 为每个列表元素分配一个 key 属性，可以解决出现到警告
@@ -268,9 +268,9 @@ function NumberList(props){
     ) */
 
     // 在JSX中嵌入map()
-    return(
+    return (
         <ul>
-            {numbers.map((number)=>
+            {numbers.map((number) =>
                 <ListItem key={number.toString()} value={number} />
             )}
         </ul>
@@ -278,61 +278,61 @@ function NumberList(props){
 }
 
 // 受控组件
-class NameForm extends React.Component{
-    constructor(props){
+class NameForm extends React.Component {
+    constructor(props) {
         super(props);
-        this.state = {value: ''};
+        this.state = { value: '' };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange(event) {
-        this.setState({value: event.target.value})
+        this.setState({ value: event.target.value })
     }
 
-    handleSubmit(event){
+    handleSubmit(event) {
         alert('提交的名字：' + this.state.value);
         event.preventDefault(); // 阻止默认行为
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <form onSubmit={this.handleSubmit}>
                 <label>
                     名字：
-                    <input type='text' value={this.state.value} onChange={this.handleChange}/>
+                    <input type='text' value={this.state.value} onChange={this.handleChange} />
                     {/* 由于 handlechange 在每次按键时都会执行并更新 React 的 state，因此显示的值将随着用户输入而更新 */}
                 </label>
-                <input type='submit' value='提交'/>
+                <input type='submit' value='提交' />
             </form>
         );
     }
 }
 
 // textarea标签
-class EssayForm extends React.Component{
-    constructor(props){
+class EssayForm extends React.Component {
+    constructor(props) {
         super(props);
-        this.state = {value: 'aaaa'};
+        this.state = { value: 'aaaa' };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleChange(event){
-        this.setState({value: event.target.value});
+    handleChange(event) {
+        this.setState({ value: event.target.value });
     }
 
-    handleSubmit(event){
+    handleSubmit(event) {
         alert('提交的文章：' + this.state.value);
         event.preventDefault();
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <form onSubmit={this.handleSubmit}>
                 <label>
                     文章：
-                    <textarea value={this.state.value} onChange={this.handleChange}/>
+                    <textarea value={this.state.value} onChange={this.handleChange} />
                     {/* 与 input 十分类似 */}
                 </label>
             </form>
@@ -341,36 +341,36 @@ class EssayForm extends React.Component{
 }
 
 // select标签
-class FruitForm extends React.Component{
-    constructor(props){
+class FruitForm extends React.Component {
+    constructor(props) {
         super(props);
-        this.state = {value: 'apple'};
+        this.state = { value: 'apple' };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleChange(event){
-        this.setState({value: event.target.value});
+    handleChange(event) {
+        this.setState({ value: event.target.value });
     }
 
-    handleSubmit(event){
+    handleSubmit(event) {
         alert('你选择的是：' + this.state.value);
         event.preventDefault();
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <form onSubmit={this.handleSubmit}>
-            <label>
-                选择你喜欢的水果：
+                <label>
+                    选择你喜欢的水果：
                 {/* 根 select 中的 value 属性表示选中的元素 */}
-                <select value={this.state.value} onChange={this.handleChange}>
-                    <option value='apple'>苹果</option>
-                    <option value='orange'>橙子</option>
-                    <option value='banana'>香蕉</option>
-                </select>
-            </label>
-            <input type='submit' value='提交'/>
+                    <select value={this.state.value} onChange={this.handleChange}>
+                        <option value='apple'>苹果</option>
+                        <option value='orange'>橙子</option>
+                        <option value='banana'>香蕉</option>
+                    </select>
+                </label>
+                <input type='submit' value='提交' />
             </form>
         )
     }
@@ -378,38 +378,38 @@ class FruitForm extends React.Component{
 
 // 处理多个输入
 // 给 input 添加 name 属性，根据 event.target.name 执行不同的操作
-class Reservation extends React.Component{
-    constructor(props){
+class Reservation extends React.Component {
+    constructor(props) {
         super(props);
         this.state = {
-            isGoing:true,
-            numberOfGuests:2
+            isGoing: true,
+            numberOfGuests: 2
         };
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
-    handleInputChange(event){
+    handleInputChange(event) {
         const target = event.target;
         const name = target.name;
         const value = name === 'isGoing' ? target.checked : target.value;
-        
+
         this.setState({
-            [name]:value
+            [name]: value
         });
         // [name] 计算属性名称，中括号中是表达式，计算结果作为属性名
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <form>
                 <label>
                     参与：
-                    <input name='isGoing' type='checkbox' checked={this.state.isGoing} onChange={this.handleInputChange}/>
+                    <input name='isGoing' type='checkbox' checked={this.state.isGoing} onChange={this.handleInputChange} />
                 </label>
                 <br />
                 <label>
                     来宾人数：
-                    <input name='numberOfGuests' type='number' value={this.state.numberOfGuests} onChange={this.handleInputChange}/>
+                    <input name='numberOfGuests' type='number' value={this.state.numberOfGuests} onChange={this.handleInputChange} />
                 </label>
             </form>
         )
@@ -419,9 +419,9 @@ class Reservation extends React.Component{
 // 状态提升
 // 将 TemperatureInput 组件中的 state 移动到 Calculator 组件中
 function BoilingVerdict(props) {
-    if(props.celsius >= 100){
+    if (props.celsius >= 100) {
         return <p>boiling</p>
-    }else{
+    } else {
         return <p>not boiling</p>
     }
 }
@@ -431,59 +431,59 @@ const scaleNames = {
     f: '华氏度'
 }
 
-class TemperatureInput extends React.Component{
-    constructor(props){
+class TemperatureInput extends React.Component {
+    constructor(props) {
         super(props);
-        this.state = {temperature:''};
+        this.state = { temperature: '' };
         this.handleChange = this.handleChange.bind(this);
     }
 
-    handleChange(event){
+    handleChange(event) {
         // this.setState({temperature:event.target.value})
         this.props.onTemperatureChange(event.target.value);
     }
 
-    render(){
+    render() {
         // 将 this.state 改为 this.props
         // this.props.temperature 需要从 Calculator 组件传入
         // props 是只读的，temperature 是由父组件传入的 prop，因此 TemperatureInput 组件不能修改它，解决这个问题要用到 受控组件
         const temperature = this.props.temperature;
         const scale = this.props.scale;
-        return(
+        return (
             <fieldset>
                 <legend>输入{scaleNames[scale]}温度：</legend>
-                <input value={temperature} onChange={this.handleChange}/>
-                <BoilingVerdict celsius={temperature}/>
+                <input value={temperature} onChange={this.handleChange} />
+                <BoilingVerdict celsius={temperature} />
             </fieldset>
         )
     }
 }
 
-class Calculator extends React.Component{
-    constructor(props){
+class Calculator extends React.Component {
+    constructor(props) {
         super(props);
-        this.state = {scale:'c',temperature:''};
+        this.state = { scale: 'c', temperature: '' };
         this.handleCelsiusChange = this.handleCelsiusChange.bind(this);
         this.handleFahrenheitChange = this.handleFahrenheitChange.bind(this);
     }
 
-    handleCelsiusChange(temperature){
-        this.setState({scale:'c',temperature});
+    handleCelsiusChange(temperature) {
+        this.setState({ scale: 'c', temperature });
     }
 
-    handleFahrenheitChange(temperature){
-        this.setState({scale:'f',temperature});
+    handleFahrenheitChange(temperature) {
+        this.setState({ scale: 'f', temperature });
     }
 
-    render(){
+    render() {
         const scale = this.state.scale;
         const temperature = this.state.temperature;
-        const celsius = scale === 'f' ? tryConvert(temperature,toCelsius) : temperature;
-        const fahrenheit = scale === 'c' ? tryConvert(temperature,toFahrenheit) : temperature;
-        return(
+        const celsius = scale === 'f' ? tryConvert(temperature, toCelsius) : temperature;
+        const fahrenheit = scale === 'c' ? tryConvert(temperature, toFahrenheit) : temperature;
+        return (
             <div>
-                <TemperatureInput scale='c' temperature={celsius} onTemperatureChange={this.handleCelsiusChange}/>
-                <TemperatureInput scale='f' temperature={fahrenheit} onTemperatureChange={this.handleFahrenheitChange}/>
+                <TemperatureInput scale='c' temperature={celsius} onTemperatureChange={this.handleCelsiusChange} />
+                <TemperatureInput scale='f' temperature={fahrenheit} onTemperatureChange={this.handleFahrenheitChange} />
             </div>
         )
     }
@@ -497,9 +497,9 @@ function toFahrenheit(celsius) {
     return (celsius * 9 / 5) + 32;
 }
 
-function tryConvert(temperature,convert) {
+function tryConvert(temperature, convert) {
     const input = parseFloat(temperature); // 将输入的温度转换为浮点数
-    if(Number.isNaN(input)){ // 输入的温度为NaN，无效，返回空字符串
+    if (Number.isNaN(input)) { // 输入的温度为NaN，无效，返回空字符串
         return '';
     }
     const output = convert(input); // 输入的温度有效，进行转换
@@ -507,9 +507,51 @@ function tryConvert(temperature,convert) {
     return rounded.toString(); // 转换为字符串返回
 }
 
-const messages = ['react','re:react','re:re:react'];
+// 组合
+// 包含关系  特例关系
+function Border(props) {
+    return (
+        <div className={'border-' + props.color}>
+            {props.children}
+            {props.left}
+        </div>
+    )
+}
 
-const numbers = [1,2,3,4,5,6,7];
+function Left() {
+    return (
+        <div>left</div>
+    )
+}
+
+function Dialog(props) {
+    return (
+        <div>
+            <Border color='red' left={<Left />}>
+                <h1>welcom</h1>
+                <p>welcom red</p>
+                {props.title}
+            </Border>
+            <Border color='blue'>
+                <h1>welcom</h1>
+                <p>welcom blue</p>
+            </Border>
+        </div>
+    )
+}
+
+// WelcomDialog 是 Dialog 的一个特殊实例
+function WelcomDialog() {
+    return (
+        <Dialog title='我是特殊实例' />
+    )
+}
+
+
+
+const messages = ['react', 're:react', 're:re:react'];
+
+const numbers = [1, 2, 3, 4, 5, 6, 7];
 
 function App() {
     return (
@@ -518,14 +560,16 @@ function App() {
             <ActionLink />
             <Toggle />
             <LoginControl />
-            <MailBox unreadMessage={messages}/>
+            <MailBox unreadMessage={messages} />
             <Page />
-            <NumberList numbers={numbers}/>
+            <NumberList numbers={numbers} />
             <NameForm />
             <EssayForm />
             <FruitForm />
             <Reservation />
             <Calculator />
+            <Dialog />
+            <WelcomDialog />
         </div>
     )
 }
