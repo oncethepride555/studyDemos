@@ -15,3 +15,11 @@
     font-size: 14pt;
     color: white;
   }
+
+  .border-blue{
+    border: 1px solid blue;
+  }
+
+  .border-red{
+    border: 1px solid red;
+  }
