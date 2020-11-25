@@ -416,6 +416,97 @@ class Reservation extends React.Component{
     }
 }
 
+// 状态提升
+// 将 TemperatureInput 组件中的 state 移动到 Calculator 组件中
+function BoilingVerdict(props) {
+    if(props.celsius >= 100){
+        return <p>boiling</p>
+    }else{
+        return <p>not boiling</p>
+    }
+}
+
+const scaleNames = {
+    c: '摄氏度',
+    f: '华氏度'
+}
+
+class TemperatureInput extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {temperature:''};
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(event){
+        // this.setState({temperature:event.target.value})
+        this.props.onTemperatureChange(event.target.value);
+    }
+
+    render(){
+        // 将 this.state 改为 this.props
+        // this.props.temperature 需要从 Calculator 组件传入
+        // props 是只读的，temperature 是由父组件传入的 prop，因此 TemperatureInput 组件不能修改它，解决这个问题要用到 受控组件
+        const temperature = this.props.temperature;
+        const scale = this.props.scale;
+        return(
+            <fieldset>
+                <legend>输入{scaleNames[scale]}温度：</legend>
+                <input value={temperature} onChange={this.handleChange}/>
+                <BoilingVerdict celsius={temperature}/>
+            </fieldset>
+        )
+    }
+}
+
+class Calculator extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {scale:'c',temperature:''};
+        this.handleCelsiusChange = this.handleCelsiusChange.bind(this);
+        this.handleFahrenheitChange = this.handleFahrenheitChange.bind(this);
+    }
+
+    handleCelsiusChange(temperature){
+        this.setState({scale:'c',temperature});
+    }
+
+    handleFahrenheitChange(temperature){
+        this.setState({scale:'f',temperature});
+    }
+
+    render(){
+        const scale = this.state.scale;
+        const temperature = this.state.temperature;
+        const celsius = scale === 'f' ? tryConvert(temperature,toCelsius) : temperature;
+        const fahrenheit = scale === 'c' ? tryConvert(temperature,toFahrenheit) : temperature;
+        return(
+            <div>
+                <TemperatureInput scale='c' temperature={celsius} onTemperatureChange={this.handleCelsiusChange}/>
+                <TemperatureInput scale='f' temperature={fahrenheit} onTemperatureChange={this.handleFahrenheitChange}/>
+            </div>
+        )
+    }
+}
+
+function toCelsius(fahrenheit) {
+    return (fahrenheit - 32) * 5 / 9;
+}
+
+function toFahrenheit(celsius) {
+    return (celsius * 9 / 5) + 32;
+}
+
+function tryConvert(temperature,convert) {
+    const input = parseFloat(temperature); // 将输入的温度转换为浮点数
+    if(Number.isNaN(input)){ // 输入的温度为NaN，无效，返回空字符串
+        return '';
+    }
+    const output = convert(input); // 输入的温度有效，进行转换
+    const rounded = Math.round(output * 1000) / 1000; // 将转换后的温度四舍五入保留三位小数
+    return rounded.toString(); // 转换为字符串返回
+}
+
 const messages = ['react','re:react','re:re:react'];
 
 const numbers = [1,2,3,4,5,6,7];
@@ -434,6 +525,7 @@ function App() {
             <EssayForm />
             <FruitForm />
             <Reservation />
+            <Calculator />
         </div>
     )
 }
