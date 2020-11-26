@@ -607,6 +607,58 @@ function GroupingControls() {
     )
 }
 
+// refs 访问 DOM 节点
+class CustomTextInput extends React.Component {
+    constructor(props) {
+        super(props);
+        // 创建一个 ref 来存储 textInput 的 DOM 元素
+        this.textInput = React.createRef();
+        this.focusTextInput = this.focusTextInput.bind(this);
+    }
+
+    focusTextInput() {
+        // 直接使用原生 API 使 text 输入框获得焦点
+        // 注意：我们通过 "current" 来访问 DOM 节点
+        this.textInput.current.focus();
+    }
+
+    render() {
+        // 告诉 React 我们想把 <input> ref 关联到
+        // 构造器里创建的 `textInput` 上
+        return (
+            <div>
+                <input
+                    type="text"
+                    ref={this.textInput} />
+                <input
+                    type="button"
+                    value="Focus the text input"
+                    onClick={this.focusTextInput}
+                />
+            </div>
+        );
+    }
+}
+
+class AutoFocusTextInput extends React.Component {
+    constructor(props) {
+        super(props);
+        this.textInput = React.createRef();
+    }
+
+    // 生命周期钩子 挂载后
+    componentDidMount() {
+        // 挂载后立即被点击
+        this.textInput.current.focusTextInput();
+    }
+
+    render() {
+        return (
+            <CustomTextInput ref={this.textInput} />
+        );
+    }
+}
+
 const messages = ['react', 're:react', 're:re:react'];
 
 const numbers = [1, 2, 3, 4, 5, 6, 7];
@@ -630,6 +682,8 @@ function App() {
             <WelcomDialog />
             <SimpleControl />
             <GroupingControls />
+            {/* <CustomTextInput /> */}
+            <AutoFocusTextInput />
         </div>
     )
 }
