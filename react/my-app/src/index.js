@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css'
+import './index.css';
+import PropTypes from 'prop-types';
 
 // 函数组件
 /* function Clock(props) {
@@ -548,25 +549,25 @@ function WelcomDialog() {
 }
 
 // 无障碍
-// tabindex 属性
+// tabIndex 属性
 function SimpleControl() {
     return (
-        // 没有tabindex 属性的话, 这些 <span> 元素不会被键盘focus中
+        // 没有tabIndex 属性的话, 这些 <span> 元素不会被键盘focus中
         <div>
             <div>
-                <span role="checkbox" aria-checked="true" tabindex="0">
+                <span role="checkbox" aria-checked="true" tabIndex="0">
                     <img src="checked.gif" role="presentation" alt="" />
                     Include decorative fruit basket
                 </span>
             </div>
             <div>
-                <span role="checkbox" aria-checked="true" tabindex="0">
+                <span role="checkbox" aria-checked="true" tabIndex="0">
                     <img src="checked.gif" role="presentation" alt="" />
                     Include singing telegram
                 </span>
             </div>
             <div>
-                <span role="checkbox" aria-checked="false" tabindex="0">
+                <span role="checkbox" aria-checked="false" tabIndex="0">
                     <img src="unchecked.gif" role="presentation" alt="" />
                     Require payment before delivery
                 </span>
@@ -578,28 +579,28 @@ function SimpleControl() {
 function GroupingControls() {
     return (
         <div>
-            <ul id="mb1" tabindex="0">
+            <ul id="mb1" tabIndex="0">
                 <li id="mb1_menu1"> Font
-                    <ul id="fontMenu" title="Font" tabindex="-1">
-                        <li id="sans-serif" tabindex="-1">Sans-serif</li>
-                        <li id="serif" tabindex="-1">Serif</li>
-                        <li id="monospace" tabindex="-1">Monospace</li>
-                        <li id="fantasy" tabindex="-1">Fantasy</li>
+                    <ul id="fontMenu" title="Font" tabIndex="-1">
+                        <li id="sans-serif" tabIndex="-1">Sans-serif</li>
+                        <li id="serif" tabIndex="-1">Serif</li>
+                        <li id="monospace" tabIndex="-1">Monospace</li>
+                        <li id="fantasy" tabIndex="-1">Fantasy</li>
                     </ul>
                 </li>
-                <li id="mb1_menu2" tabindex="-1"> Style
-                    <ul id="styleMenu" title="Style" tabindex="-1">
-                        <li id="italic" tabindex="-1">Italics</li>
-                        <li id="bold" tabindex="-1">Bold</li>
-                        <li id="underline" tabindex="-1">Underlined</li>
+                <li id="mb1_menu2" tabIndex="-1"> Style
+                    <ul id="styleMenu" title="Style" tabIndex="-1">
+                        <li id="italic" tabIndex="-1">Italics</li>
+                        <li id="bold" tabIndex="-1">Bold</li>
+                        <li id="underline" tabIndex="-1">Underlined</li>
                     </ul>
                 </li>
-                <li id="mb1_menu3" tabindex="-1"> Justification
-                    <ul id="justificationMenu" title="Justication" tabindex="-1">
-                        <li id="left" tabindex="-1">Left</li>
-                        <li id="center" tabindex="-1">Centered</li>
-                        <li id="right" tabindex="-1">Right</li>
-                        <li id="justify" tabindex="-1">Justify</li>
+                <li id="mb1_menu3" tabIndex="-1"> Justification
+                    <ul id="justificationMenu" title="Justication" tabIndex="-1">
+                        <li id="left" tabIndex="-1">Left</li>
+                        <li id="center" tabIndex="-1">Centered</li>
+                        <li id="right" tabIndex="-1">Right</li>
+                        <li id="justify" tabIndex="-1">Justify</li>
                     </ul>
                 </li>
             </ul>
@@ -659,6 +660,31 @@ class AutoFocusTextInput extends React.Component {
     }
 }
 
+class MyTitle extends React.Component {
+    render() {
+        return (
+            <div>
+                <h1>{this.props.title}</h1>
+                <h2>{this.props.name}</h2>
+                <h3>{this.props.type}</h3>
+            </div>
+        )
+    }
+}
+
+// propTypes 进行类型检查
+MyTitle.propTypes = {
+    // 声明 title 属性是必须的，并且数据类型要为字符串，相当于是规范化的接口文档
+    title: PropTypes.string.isRequired
+}
+
+// 设置 prop 默认值
+MyTitle.defaultProps = {
+    name: 'wss'
+}
+
+var data = '123';
+
 const messages = ['react', 're:react', 're:re:react'];
 
 const numbers = [1, 2, 3, 4, 5, 6, 7];
@@ -684,6 +710,7 @@ function App() {
             <GroupingControls />
             {/* <CustomTextInput /> */}
             <AutoFocusTextInput />
+            <MyTitle title={data} type={true}/>
         </div>
     )
 }
