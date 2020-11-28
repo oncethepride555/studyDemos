@@ -1,0 +1,16 @@
+tbody>tr{
+    text-align: center;
+  }
+
+  tbody>tr:nth-child(odd){
+    background-color: #cfe8f1;
+  }
+
+  tbody>tr:nth-child(even){
+    background-color: #ebe8e8;
+  }
+
+  /* 单元格之间的间隔 */
+  /* table{
+    border-spacing: 10px;
+  } */
