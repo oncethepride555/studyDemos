@@ -514,28 +514,25 @@ function Border(props) {
     return (
         <div className={'border-' + props.color}>
             {props.children}
-            {props.left}
+            {props.myDefin}
         </div>
     )
 }
 
-function Left() {
+function MyDefin() {
     return (
-        <div>left</div>
+        <div>使用自定义prop，而不用children</div>
     )
 }
 
 function Dialog(props) {
     return (
         <div>
-            <Border color='red' left={<Left />}>
-                <h1>welcom</h1>
-                <p>welcom red</p>
-                {props.title}
-            </Border>
-            <Border color='blue'>
+            <Border color='blue' myDefin={<MyDefin />}>
                 <h1>welcom</h1>
                 <p>welcom blue</p>
+                <p>props.children</p>
+                {props.title}
             </Border>
         </div>
     )

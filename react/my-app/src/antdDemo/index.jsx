@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { ConfigProvider, Button, DatePicker, version, message, Alert } from 'antd'
+import { ConfigProvider, Button, DatePicker, version, message, Alert, Card } from 'antd'
 import 'antd/dist/antd.css'
 import './index.scss'
 // antd 的默认文案是英文，需要修改为中文
@@ -17,19 +17,24 @@ const Date = () => {
         setDate(value); // 将 state 值更新为 value
     }
     return (
-        <ConfigProvider locale={zhCN}>
-            <div className='app'>
-                <h1>ant-design version:{version}</h1>
-                <DatePicker onChange={handleChange} />
-                <Button type='primary' style={{ marginLeft: 8 }}>
-                    Primary Button
+        <>
+            <ConfigProvider locale={zhCN}>
+                <div className='app'>
+                    <h1>ant-design version:{version}</h1>
+                    <DatePicker onChange={handleChange} />
+                    <Button type='primary' style={{ marginLeft: 8 }}>
+                        Primary Button
                 </Button>
-                <div style={{ marginTop: 16 }}>
-                    <Alert message='当前日期：' description={date ? date.format('YYYY年MM月DD日') : '未选择'} type='info' showIcon closable />
+                    <div style={{ marginTop: 16 }}>
+                        <Alert message='当前日期：' description={date ? date.format('YYYY年MM月DD日') : '未选择'} type='info' showIcon closable />
+                    </div>
                 </div>
-            </div>
-        </ConfigProvider>
-
+            </ConfigProvider>
+            <Card title="Card" style={{ width: 300 }}>
+                <p>Card content</p>
+                <p>Card content</p>
+            </Card>
+        </>
     )
 }
 
